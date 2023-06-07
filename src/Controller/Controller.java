@@ -19,16 +19,19 @@ public class Controller {
             switch (sc.next().trim().toLowerCase(Locale.ROOT)){
                 case "z":
                     Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width-1,Board.getPlayer().getCoordinates().height));
+                    ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "q":
                     Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height-1));
-
+                    ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "s":
                     Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width+1,Board.getPlayer().getCoordinates().height));
+                    ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "d":
                     Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height+1));
+                    ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "restart":
                     b=new Board(5,5,1);

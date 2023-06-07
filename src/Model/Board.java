@@ -88,7 +88,6 @@ public class Board {
     }
 
     public static void  movePlayer(Dimension c){
-        ConsoleWriter.printBoard(board);
         switch (board[c.width][c.height].getType()) {
             case wall:
                 break;
