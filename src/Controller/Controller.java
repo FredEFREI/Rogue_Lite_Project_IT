@@ -13,10 +13,8 @@ public class Controller {
     public Controller(){
         boolean running=true;
         Board b=new Board(5,5,1);
-        DataInputStream input = new DataInputStream(System.in);
-        Scanner sc=new Scanner(System.in);
         while (running){
-            switch (sc.next().trim().toLowerCase(Locale.ROOT)){
+            switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
                 case "z":
                     Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width-1,Board.getPlayer().getCoordinates().height));
                     ConsoleWriter.printBoard(Board.getBoard());
