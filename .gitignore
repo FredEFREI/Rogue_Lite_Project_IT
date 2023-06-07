@@ -24,3 +24,5 @@
 hs_err_pid*
 replay_pid*
 
+*.iml
+.idea/Rogue_Lite_Project_IT.iml
