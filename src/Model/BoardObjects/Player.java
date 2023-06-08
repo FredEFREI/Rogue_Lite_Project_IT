@@ -17,9 +17,12 @@ public class Player extends BoardObject{
     private ArrayList<Item> inventory;
 
     public Player(){
-        this(Board.generateCoordinates(this));
+        Dimension d = Board.generateCoordinates(this);
+        boardX = d.width;
+        boardY = d.height;
+        inventory = new ArrayList<>();
     }
-    
+
     public Player(Dimension coordinates){
         boardX=coordinates.width;
         boardY=coordinates.height;
