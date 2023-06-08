@@ -9,14 +9,16 @@ public class Player extends BoardObject{
     int armor=0;
     int health=100;
     int damage=10;
+    ArrayList<Collectible> inventory;
+
     public Player(){
-        Dimension d= Board.generateCoordinates(this);
-        boardX=d.width;
-        boardY=d.height;
+        this(Board.generateCoordinates(this));
     }
+    
     public Player(Dimension coordinates){
         boardX=coordinates.width;
         boardY=coordinates.height;
+        inventory = new ArrayList<>();
     }
 
 
