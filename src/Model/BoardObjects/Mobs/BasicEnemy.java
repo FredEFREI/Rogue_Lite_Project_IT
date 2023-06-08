@@ -4,11 +4,12 @@ import Model.Board;
 import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.Item;
 import Model.BoardObjects.ObjType;
+import Model.BoardObjects.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BasicEnemy extends BoardObject implements Enemy{
+public class BasicEnemy extends BoardObject implements Mob{
 
     public BasicEnemy(){
         type = ObjType.enemy;
@@ -30,8 +31,8 @@ public class BasicEnemy extends BoardObject implements Enemy{
         return false;
     }
 
-    public void attack() {
-
+    public void attack(Mob m) {
+        int damages = (int) Math.round(Math.random() * 50);
     }
 
     public ArrayList<Item> die() {

@@ -17,23 +17,28 @@ public class Controller {
     public Controller(){
         boolean running=true;
         Board b=new Board(10,5,10,5);
+        String fout="";
         while (running){
             switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
                 case "z":
-                    Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width-1,Board.getPlayer().getCoordinates().height));
+                    fout=Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width-1,Board.getPlayer().getCoordinates().height));
                     ConsoleWriter.printBoard(Board.getBoard());
+                    System.out.println(fout);
                     break;
                 case "q":
-                    Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height-1));
+                    fout=Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height-1));
                     ConsoleWriter.printBoard(Board.getBoard());
+                    System.out.println(fout);
                     break;
                 case "s":
-                    Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width+1,Board.getPlayer().getCoordinates().height));
+                    fout=Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width+1,Board.getPlayer().getCoordinates().height));
                     ConsoleWriter.printBoard(Board.getBoard());
+                    System.out.println(fout);
                     break;
                 case "d":
-                    Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height+1));
+                    fout=Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height+1));
                     ConsoleWriter.printBoard(Board.getBoard());
+                    System.out.println(fout);
                     break;
                 case "restart":
                     b=new Board(5,5,1);

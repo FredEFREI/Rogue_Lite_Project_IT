@@ -2,6 +2,8 @@ package Model;
 
 import Model.BoardObjects.*;
 import Model.BoardObjects.Collectible.Armor;
+import Model.BoardObjects.Collectible.Collectible;
+import Model.BoardObjects.Collectible.Item;
 import Model.BoardObjects.Mobs.BasicEnemy;
 import Vue.ConsoleWriter;
 
@@ -121,18 +123,21 @@ public class Board {
      * Méthode pour déplacer le joueur
      * @param c Nouveles coordonnées du joueur
      */
-    public static void  movePlayer(Dimension c){
-        switch (board[c.width][c.height].getType()) {
-            case wall:
-                break;
-            case armor:
-                Armor a= (Armor) board[c.width][c.height];
-                a.use(player);
+    public static String  movePlayer(Dimension c){
+        String out="";
+        if (!(board[c.width][c.height] instanceof Collectible)) {
+            if (board[c.width][c.height].getType() != ObjType.wall) {
+                if(board[c.width][c.height].getType()==ObjType.enemy){
+                    out="Fight started with "+board[c.width][c.height].getType();
+                }
                 refreshCoordinates(c);
-                break;
-            case empty:
-                refreshCoordinates(c);
-                break;
+                return out;
+            }else{return "You can't walk thought walls";}
+        } else {
+            out=board[c.width][c.height].getType()+" picked up!";
+            ((Collectible) board[c.width][c.height]).collect(player);
+            refreshCoordinates(c);
+            return out;
         }
     }
 
