@@ -67,6 +67,7 @@ public class ConsoleWriter {
         for (T object : list){
             listPrint += object.toString() + " | ";
         }
+        System.out.println(listPrint);
     }
 
     /**
@@ -78,7 +79,7 @@ public class ConsoleWriter {
         boolean stopped=false;
         String in="";
         while (!stopped) {
-            System.out.println("Choose an option: \n");
+            System.out.println("Choose an option: ");
             for (String option : options) {
                 System.out.println((options.indexOf(option))+1 + ": " + option);
             }
@@ -92,11 +93,15 @@ public class ConsoleWriter {
                     System.out.println("Wrong number, please choose between 1 and "+options.size());
 
             } catch (NumberFormatException e) {
-                if(in.equals("stop")){return 0;}
+                if(in.equals("stop")){return 0-1;}
                 System.out.println("Please enter the number of the answer");
             }
         }
         return -1;
+    }
+
+    public static void waitPlayer(){
+        sc.next();
     }
 
     /**

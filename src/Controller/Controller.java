@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Board;
+import Model.BoardObjects.Collectible.Collectible;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.io.DataInputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+
 
 /**
  * Controlleur principal
@@ -39,6 +41,25 @@ public class Controller {
                     fout=Board.movePlayer(new Dimension(Board.getPlayer().getCoordinates().width,Board.getPlayer().getCoordinates().height+1));
                     ConsoleWriter.printBoard(Board.getBoard());
                     System.out.println(fout);
+                    break;
+                case "i":
+                    ConsoleWriter.printList("Inventory :",Board.getPlayer().getInventory());
+                    ArrayList<String> o=new ArrayList<>();
+                    o.add("Use an Item");
+                    if(ConsoleWriter.AskQuestion(o)==0) {
+                        ArrayList<String> opt = new ArrayList<>();
+                        for (Collectible elem : Board.getPlayer().getInventory()) {
+                            opt.add(elem.toString());
+                        }
+                        int itemid=ConsoleWriter.AskQuestion(opt);
+                        if(itemid>=0) {
+                            Board.getPlayer().getInventory().get(itemid).use(Board.getPlayer());
+                            Board.getPlayer().removeItem(Board.getPlayer().getInventory().get(itemid));
+                            ConsoleWriter.printBoard(Board.getBoard());
+                            System.out.println("Item used");
+                            break;
+                        }
+                    }
                     break;
                 case "restart":
                     b=new Board(5,5,1);

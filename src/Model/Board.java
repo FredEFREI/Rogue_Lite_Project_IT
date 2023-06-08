@@ -5,6 +5,7 @@ import Model.BoardObjects.Collectible.Armor;
 import Model.BoardObjects.Collectible.Collectible;
 import Model.BoardObjects.Collectible.Item;
 import Model.BoardObjects.Mobs.BasicEnemy;
+import Model.BoardObjects.Mobs.Mob;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
@@ -128,10 +129,49 @@ public class Board {
         if (!(board[c.width][c.height] instanceof Collectible)) {
             if (board[c.width][c.height].getType() != ObjType.wall) {
                 if(board[c.width][c.height].getType()==ObjType.enemy){
-                    out="Fight started with "+board[c.width][c.height].getType();
+                    boolean fight_ended=false;
+                    ArrayList<String> options=new ArrayList<>();
+                    options.add("Attack");
+                    options.add("See your stats");
+                    options.add("Inventory");
+                    options.add("Flee");
+                    System.out.println("Fight started with "+board[c.width][c.height].getClass().getSimpleName());
+                    while(!fight_ended) {
+                        switch (ConsoleWriter.AskQuestion(options)) {
+                            case 0:
+                                player.attack((Mob)board[c.width][c.height]);
+                                if(((Mob) board[c.width][c.height]).isDead()) {
+                                    System.out.println("Type anything to continue");
+                                    ConsoleWriter.waitPlayer();
+                                    fight_ended=true;
+                                }
+                                break;
+                            case 1:
+                                ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
+                                ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
+                                break;
+                            case 2:
+                                ConsoleWriter.printList("Inventory :",player.getInventory());
+                                ArrayList<String> o=new ArrayList<>();
+                                o.add("Use an Item");
+                                if(ConsoleWriter.AskQuestion(o)==0) {
+                                    ArrayList<String> opt = new ArrayList<>();
+                                    for (Collectible elem : player.getInventory()) {
+                                        opt.add(elem.toString());
+                                    }
+                                    int itemid=ConsoleWriter.AskQuestion(opt);
+                                    player.getInventory().get(itemid).use(player);
+                                    player.removeItem(player.getInventory().get(itemid));
+                                    System.out.println("Item used");
+                                    ((Mob)board[c.width][c.height]).attack(player);
+                                }
+                                break;
+                            case 3:
+                                return "You fled...";
+                        }
+                    }
                 }
                 refreshCoordinates(c);
-                return out;
             }else{return "You can't walk thought walls";}
         } else {
             out=board[c.width][c.height].getType()+" picked up!";
@@ -139,6 +179,7 @@ public class Board {
             refreshCoordinates(c);
             return out;
         }
+        return out;
     }
 
     /**

@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public interface Mob {
 
-
     /**
      * Méthode qui permet à un Mob d'attaquer
      */
@@ -20,4 +19,9 @@ public interface Mob {
      * @return retourne un liste contenant le loot du mob
      */
     ArrayList<Item> die();
+
+    int getHealth();
+    void inflictDamage(int i);
+
+    boolean isDead();
 }

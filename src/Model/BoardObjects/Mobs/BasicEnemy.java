@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BasicEnemy extends BoardObject implements Mob{
-
+    int health = 100;
     public BasicEnemy(){
         type = ObjType.enemy;
         Dimension d = Board.generateCoordinates(this);
@@ -33,14 +33,38 @@ public class BasicEnemy extends BoardObject implements Mob{
 
     public void attack(Mob m) {
         int damages = (int) Math.round(Math.random() * 50);
+        m.inflictDamage(damages);
+        System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
+        if(m.isDead()){
+            System.out.println("You died!");
+            m.die();
+        }
     }
 
     public ArrayList<Item> die() {
+        health=0;
+        System.out.println("Your enemy dropped: \n");
         return null;
     }
 
-    public void setCoordiantes(Dimension c) {
+    public int getHealth() {
+        return health;
+    }
 
+    @Override
+    public void inflictDamage(int i) {
+        health-=i;
+    }
+
+    public void setHealth(int i) {
+        health=i;
+    }
+
+    @Override
+    public boolean isDead() {
+        if(health<=0)
+            return true;
+        return false;
     }
 
     @Override

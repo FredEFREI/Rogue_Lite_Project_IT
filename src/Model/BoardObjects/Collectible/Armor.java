@@ -9,10 +9,22 @@ import Model.BoardObjects.Player;
 import java.awt.*;
 
 public class Armor extends Item {
-    private int size= (int) Math.round( Math.random()*3);
+    private int value=25;
 
     public Armor(){
         super("Armor", "Gain armor", ObjType.armor);
+        int size= (int) Math.round( Math.random()*3);
+        switch (size){
+            case 0:
+                value=25;
+                break;
+            case 1:
+                value=50;
+                break;
+            case 2:
+                value=100;
+                break;
+        }
         Dimension d= Board.generateCoordinates(this);
         boardX=d.width;
         boardY=d.height;
@@ -22,29 +34,17 @@ public class Armor extends Item {
     public int collect(Player p) {
         boardX=0;
         boardY=0;
+        p.addItem(this);
         return 0;
     }
 
     @Override
     public int use(Player p) {
         int parmor=p.getArmor();
-        switch (size) {
-            case 0:
-                if(parmor+25<=100)
-                    p.setArmor(parmor+25);
-                else
-                    p.setArmor(100);
-                break;
-            case 1:
-                if(parmor+50<=100)
-                    p.setArmor(parmor+25);
-                else
-                    p.setArmor(100);
-                break;
-            case 2:
-                p.setArmor(100);
-                break;
-        }
+        if(parmor+value<=100)
+            p.setArmor(parmor+value);
+        else
+            p.setArmor(100);
         return 0;
     }
 
@@ -63,5 +63,10 @@ public class Armor extends Item {
     @Override
     public ObjType getType() {
         return super.getType();
+    }
+
+    @Override
+    public String toString() {
+        return "Armor ("+value+")";
     }
 }
