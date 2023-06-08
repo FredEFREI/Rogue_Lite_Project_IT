@@ -8,11 +8,11 @@ import Model.BoardObjects.Player;
 
 import java.awt.*;
 
-public class Armor extends BoardObject implements Collectible {
+public class Armor extends Item {
     private int size= (int) Math.round( Math.random()*3);
 
     public Armor(){
-        type = ObjType.armor;
+        super("Armor", "Gain armor", ObjType.armor);
         Dimension d= Board.generateCoordinates(this);
         boardX=d.width;
         boardY=d.height;
@@ -62,6 +62,6 @@ public class Armor extends BoardObject implements Collectible {
 
     @Override
     public ObjType getType() {
-        return type;
+        return super.getType();
     }
 }

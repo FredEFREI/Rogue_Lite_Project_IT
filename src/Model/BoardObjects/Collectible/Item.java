@@ -10,14 +10,15 @@ import java.awt.*;
 import java.util.*;
 
 
-public abstract class Item extends BoardObject implements Collectible{
-    private ArrayList<ObjType> types;
+public class Item extends BoardObject implements Collectible{
+    private ObjType type;
     private String name;
     private String description;
 
-    public Item(String name, String description){
+    public Item(String name, String description, ObjType type){
         this.name = name;
         this.description = description;
+        this.type = type;
     }
 
     @Override
@@ -26,5 +27,29 @@ public abstract class Item extends BoardObject implements Collectible{
         boardY=0;
         p.addItem(this);
         return 0;
+    }
+
+    @Override
+    public int use(Player p) {
+        p.removeItem(this);
+        return 0;
+    }
+
+
+    @Override
+    protected Dimension getCoordinates() {
+        return new Dimension(boardX,boardY);
+    }
+
+    @Override
+    protected boolean isOnBoard() {
+        if(boardY>=0 && boardX>=0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public ObjType getType() {
+        return type;
     }
 }

@@ -81,4 +81,8 @@ public class Player extends BoardObject{
     public void addItem(Item item){
         inventory.add(item);
     }
+
+    public void removeItem(Item item) {
+        inventory.remove(item);
+    }
 }
