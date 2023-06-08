@@ -9,7 +9,7 @@ public abstract class BoardObject {
     /**
      * Type d'objet (armure, vie ...)
      */
-    ObjType type;
+    protected ObjType type;
     /**
      * coordonée x de l'objet sur le plateau
      */

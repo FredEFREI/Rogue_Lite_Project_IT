@@ -9,13 +9,14 @@ import java.awt.*;
  * Classe représentant un mur
  */
 public class Wall extends BoardObject{
-    ObjType type = ObjType.wall;
     public Wall(){
+        type = ObjType.wall;
         Dimension d= Board.generateCoordinates(this);
         boardX=d.width;
         boardY=d.height;
     }
     public Wall(Dimension coordinates){
+        type = ObjType.wall;
         boardX=coordinates.width;
         boardY=coordinates.height;
     }

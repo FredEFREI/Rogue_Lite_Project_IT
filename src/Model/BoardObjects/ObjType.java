@@ -12,5 +12,6 @@ public enum ObjType {
     bonuslife,
     wall,
     empty,
-    player
+    player,
+    enemy
 }

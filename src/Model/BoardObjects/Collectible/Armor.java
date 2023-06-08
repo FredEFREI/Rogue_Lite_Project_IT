@@ -9,10 +9,10 @@ import Model.BoardObjects.Player;
 import java.awt.*;
 
 public class Armor extends BoardObject implements Collectible {
-    ObjType type = ObjType.armor;
     private int size= (int) Math.round( Math.random()*3);
 
     public Armor(){
+        type = ObjType.armor;
         Dimension d= Board.generateCoordinates(this);
         boardX=d.width;
         boardY=d.height;

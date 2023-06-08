@@ -10,13 +10,13 @@ import java.util.*;
  * Classe représentant le joueur
  */
 public class Player extends BoardObject{
-    private ObjType type = ObjType.player;
     private int armor=0;
     private int health=100;
     private int damage=10;
     private ArrayList<Item> inventory;
 
     public Player(){
+        type = ObjType.player;
         Dimension d = Board.generateCoordinates(this);
         boardX = d.width;
         boardY = d.height;
@@ -24,6 +24,7 @@ public class Player extends BoardObject{
     }
 
     public Player(Dimension coordinates){
+        type = ObjType.player;
         boardX=coordinates.width;
         boardY=coordinates.height;
         inventory = new ArrayList<>();
