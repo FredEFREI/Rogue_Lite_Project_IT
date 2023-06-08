@@ -6,13 +6,17 @@ import Vue.ConsoleWriter;
 import java.awt.*;
 import java.io.Console;
 import java.io.DataInputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Controlleur principal
+ */
 public class Controller {
     public Controller(){
         boolean running=true;
-        Board b=new Board(5,5,1);
+        Board b=new Board(5,5,100);
         while (running){
             switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
                 case "z":
@@ -37,6 +41,12 @@ public class Controller {
                 case "stats":
                     ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
                     ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
+                    break;
+                case "test":
+                    ArrayList t=new ArrayList<>();
+                    t.add("test");
+                    t.add("tes");
+                    System.out.println( ConsoleWriter.AskQuestion(t));
                     break;
                 case "stop":
                     running=false;

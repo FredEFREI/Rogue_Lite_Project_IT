@@ -4,6 +4,9 @@ import Model.Board;
 
 import java.awt.*;
 
+/**
+ * Classe représentant le joueur
+ */
 public class Player extends BoardObject{
     ObjType type = ObjType.player;
     int armor=0;

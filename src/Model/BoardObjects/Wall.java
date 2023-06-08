@@ -5,6 +5,9 @@ import Model.BoardObjects.Collectible.Collectible;
 
 import java.awt.*;
 
+/**
+ * Classe représentant un mur
+ */
 public class Wall extends BoardObject{
     ObjType type = ObjType.wall;
     public Wall(){

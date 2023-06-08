@@ -5,7 +5,11 @@ import Model.BoardObjects.Collectible.Collectible;
 
 import java.awt.*;
 
-public class Empty extends BoardObject implements Collectible {
+/**
+ * Classe représentant une case vide sur le plateau de jeu
+ */
+public class Empty extends BoardObject {
+
     ObjType type = ObjType.empty;
 
     public Empty(){
@@ -16,16 +20,6 @@ public class Empty extends BoardObject implements Collectible {
     public Empty(Dimension coordinates){
         boardX=coordinates.width;
         boardY=coordinates.height;
-    }
-
-    @Override
-    public int collect() {
-        return 1;
-    }
-
-    @Override
-    public int use(Player p) {
-        return 1;
     }
 
     public Dimension getCoordinates() {
