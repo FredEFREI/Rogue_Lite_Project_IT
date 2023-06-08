@@ -19,7 +19,7 @@ public class Armor extends BoardObject implements Collectible {
     }
 
     @Override
-    public int collect() {
+    public int collect(Player p) {
         boardX=0;
         boardY=0;
         return 0;
