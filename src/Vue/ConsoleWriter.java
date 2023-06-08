@@ -52,14 +52,21 @@ public class ConsoleWriter {
      * @param value Valeur en % de la barre
      */
     public static void printBar(String barname,int value){
-        String hb=barname+" :\n["+value+"%] {";
+        String bar=barname+" :\n["+value+"%] {";
         for(int i=0;i<100;i++){
             if(i<value)
-                hb+="|";
+                bar+="|";
             else
-                hb+=" ";
+                bar+=" ";
         }
-        System.out.println( hb+"} ");
+        System.out.println( bar+"} ");
+    }
+
+    public static <T> void printList(String listName, ArrayList<T> list){
+        String listPrint = listName + " \n| ";
+        for (T object : list){
+            listPrint += object.toString() + " | ";
+        }
     }
 
     /**

@@ -52,4 +52,9 @@ public class Item extends BoardObject implements Collectible{
     public ObjType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
