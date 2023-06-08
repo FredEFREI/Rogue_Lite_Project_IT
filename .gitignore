@@ -26,3 +26,6 @@ replay_pid*
 
 *.iml
 .idea/Rogue_Lite_Project_IT.iml
+.idea/misc.xml
+.idea/codeStyles/codeStyleConfig.xml
+*.xml
