@@ -1,18 +1,20 @@
 package Model.BoardObjects;
 
 import Model.Board;
+import Model.BoardObjects.Collectible.*;
 
 import java.awt.*;
+import java.util.*;
 
 /**
  * Classe représentant le joueur
  */
 public class Player extends BoardObject{
-    ObjType type = ObjType.player;
-    int armor=0;
-    int health=100;
-    int damage=10;
-    ArrayList<Collectible> inventory;
+    private ObjType type = ObjType.player;
+    private int armor=0;
+    private int health=100;
+    private int damage=10;
+    private ArrayList<Item> inventory;
 
     public Player(){
         this(Board.generateCoordinates(this));
@@ -66,5 +68,9 @@ public class Player extends BoardObject{
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public ArrayList<Item> getInventory() {
+        return inventory;
     }
 }
