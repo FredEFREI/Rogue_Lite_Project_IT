@@ -13,7 +13,7 @@ public interface Collectible {
      * méthode permettant de réccupérer un objet
      * @return retourne l'état de le réccupération selon l'objet
      */
-    int collect();
+    int collect(Player p);
 
     /**
      * Méthode permettant d'utiliser un objet

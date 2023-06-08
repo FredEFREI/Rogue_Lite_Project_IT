@@ -77,4 +77,8 @@ public class Player extends BoardObject{
     public ArrayList<Item> getInventory() {
         return inventory;
     }
+
+    public void addItem(Item item){
+        inventory.add(item);
+    }
 }

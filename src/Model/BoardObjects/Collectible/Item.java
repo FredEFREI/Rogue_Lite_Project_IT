@@ -21,14 +21,10 @@ public abstract class Item extends BoardObject implements Collectible{
     }
 
     @Override
-    public int collect() {
+    public int collect(Player p) {
         boardX=0;
         boardY=0;
-        return 0;
-    }
-
-    @Override
-    public int use(Player p) {
+        p.addItem(this);
         return 0;
     }
 }
