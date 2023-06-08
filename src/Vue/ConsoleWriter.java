@@ -1,6 +1,7 @@
 package Vue;
 
 import Model.BoardObjects.BoardObject;
+import Model.BoardObjects.Collectible.Collectible;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,18 +24,21 @@ public class ConsoleWriter {
         for (BoardObject[] row:board) {
             for (BoardObject elem:row) {
                 switch (elem.getType()){
-                    case armor:
-                        res+="D\t";
-                        break;
                     case wall:
                         res+="W\t";
                         break;
                     case player:
                         res+="@\t";
                         break;
+                    case enemy:
+                        res+="!\t";
+                        break;
                     case empty:
                         res+=" \t";
                         break;
+                }
+                if(elem instanceof Collectible) {
+                    res += "+\t";
                 }
             }
             res+="\n";

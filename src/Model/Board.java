@@ -2,6 +2,7 @@ package Model;
 
 import Model.BoardObjects.*;
 import Model.BoardObjects.Collectible.Armor;
+import Model.BoardObjects.Mobs.BasicEnemy;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
@@ -27,7 +28,7 @@ public class Board {
      * @param wallNum Nombre de murs
      * @param goodsNum Nombre d'items
      */
-    public Board(int size,int wallNum,int goodsNum){
+    public Board(int size,int wallNum,int goodsNum,int enemyNum){
         flushBoard(size);
         player=new Player();
         for(int i=0;i<wallNum;i++){
@@ -35,6 +36,9 @@ public class Board {
         }
         for(int i=0;i<goodsNum;i++){
             new Armor();
+        }
+        for(int i=0;i<enemyNum;i++){
+            new BasicEnemy();
         }
         ConsoleWriter.printBoard(board);
     }
@@ -44,7 +48,7 @@ public class Board {
      * @param wallNum Nombre de murs
      * @param goodsNum Nombre d'items
      */
-    public Board(int wallNum,int goodsNum){
+    public Board(int wallNum,int goodsNum,int enemyNum){
         flushBoard(10);
         player=new Player();
         for(int i=0;i<wallNum;i++){
@@ -52,6 +56,9 @@ public class Board {
         }
         for(int i=0;i<goodsNum;i++){
             new Armor();
+        }
+        for(int i=0;i<enemyNum;i++){
+            new BasicEnemy();
         }
         ConsoleWriter.printBoard(board);
     }

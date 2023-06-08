@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Controller {
     public Controller(){
         boolean running=true;
-        Board b=new Board(10,5,10);
+        Board b=new Board(10,5,10,5);
         while (running){
             switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
                 case "z":
