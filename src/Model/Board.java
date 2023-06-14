@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Controller;
 import Model.BoardObjects.*;
 import Model.BoardObjects.Collectible.Armor;
 import Model.BoardObjects.Collectible.Collectible;
@@ -24,6 +25,10 @@ public class Board {
      * Raccourci vers l'objet joueur
      */
     static Player player;
+    /**
+     * Raccourci vers la sortie
+     */
+    static Exit exit;
 
     /**
      * Constructeur générant un plateau
@@ -81,6 +86,24 @@ public class Board {
                 }
             }
         }
+        switch ((int) Math.round(Math.random()*3)){
+            case 0:
+                exit=new Exit(new Dimension(size/2,0));
+                board[size/2][0]=exit;
+                break;
+            case 1:
+                exit=new Exit(new Dimension(0,size/2));
+                board[size/2][0]=exit;
+                break;
+            case 2:
+                exit=new Exit(new Dimension(size,size/2));
+                board[size/2][0]=exit;
+                break;
+            case 3:
+                exit=new Exit(new Dimension(size/2,size));
+                board[size/2][0]=exit;
+                break;
+        }
     }
 
     /**
@@ -127,7 +150,7 @@ public class Board {
     public static String  movePlayer(Dimension c){
         String out="";
         if (!(board[c.width][c.height] instanceof Collectible)) {
-            if (board[c.width][c.height].getType() != ObjType.wall) {
+            if (board[c.width][c.height].getType() != ObjType.wall && board[c.width][c.height].getType() != ObjType.exit) {
                 if(board[c.width][c.height].getType()==ObjType.enemy){
                     boolean fight_ended=false;
                     ArrayList<String> options=new ArrayList<>();
@@ -162,7 +185,17 @@ public class Board {
                     }
                 }
                 refreshCoordinates(c);
-            }else{return "You can't walk thought walls";}
+                if(isEnded()){
+                    exit.setstate(true);
+                }
+            }
+            if (board[c.width][c.height].getType() == ObjType.wall) {return "You can't walk thought walls";}
+            if (board[c.width][c.height].getType() == ObjType.exit) {
+                if(exit.getSate()){Controller.restart();
+                    return "Board exited!";}
+                else
+                    return "The exit is locked!";
+            }
         } else {
             out=board[c.width][c.height].getType()+" picked up!";
             ((Collectible) board[c.width][c.height]).collect(player);
@@ -197,5 +230,16 @@ public class Board {
      */
     public static Player getPlayer() {
         return player;
+    }
+
+    private static boolean isEnded(){
+        for (BoardObject[] bo:board) {
+            for (BoardObject elem:bo) {
+                if(elem.getType()==ObjType.enemy){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

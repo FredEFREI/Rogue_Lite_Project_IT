@@ -36,6 +36,9 @@ public class ConsoleWriter {
                     case empty:
                         res+=" \t";
                         break;
+                    case exit:
+                        res+="D\t";
+                        break;
                 }
                 if(elem instanceof Collectible) {
                     res += "+\t";

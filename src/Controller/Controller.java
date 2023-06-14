@@ -16,9 +16,10 @@ import java.util.Scanner;
  * Controlleur principal
  */
 public class Controller {
+    static Board b;
     public Controller(){
         boolean running=true;
-        Board b=new Board(10,5,10,5);
+        b=new Board(5,5,1,1);
         String fout="";
         while (running){
             switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
@@ -62,7 +63,7 @@ public class Controller {
                     }
                     break;
                 case "restart":
-                    b=new Board(5,5,1);
+                    restart();
                     break;
                 case "stats":
                     ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
@@ -80,4 +81,5 @@ public class Controller {
             }
         }
     }
+    public static void restart() {b=new Board(5,5,1);}
 }

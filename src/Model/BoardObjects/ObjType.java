@@ -11,5 +11,6 @@ public enum ObjType {
     wall,
     empty,
     player,
-    enemy
+    enemy,
+    exit
 }
