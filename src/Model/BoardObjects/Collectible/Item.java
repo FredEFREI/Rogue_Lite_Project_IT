@@ -3,6 +3,7 @@ package Model.BoardObjects.Collectible;
 import Model.Board;
 import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.Collectible;
+import Model.BoardObjects.Mobs.*;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Player;
 
@@ -30,7 +31,7 @@ public class Item extends BoardObject implements Collectible{
     }
 
     @Override
-    public int use(Player p) {
+    public int use(Player p, Mob mob) {
         p.removeItem(this);
         return 0;
     }

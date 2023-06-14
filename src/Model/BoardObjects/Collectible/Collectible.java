@@ -1,5 +1,6 @@
 package Model.BoardObjects.Collectible;
 
+import Model.BoardObjects.Mobs.*;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Player;
 
@@ -20,5 +21,5 @@ public interface Collectible {
      * @param p accesseur au joueur
      * @return retourne l'état final de l'utilisation selon l'objet
      */
-    int use(Player p);
+    int use(Player p, Mob mob);
 }

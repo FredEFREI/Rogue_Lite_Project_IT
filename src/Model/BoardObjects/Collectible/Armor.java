@@ -3,6 +3,7 @@ package Model.BoardObjects.Collectible;
 import Model.Board;
 import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.Collectible;
+import Model.BoardObjects.Mobs.*;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Player;
 
@@ -39,7 +40,7 @@ public class Armor extends Item {
     }
 
     @Override
-    public int use(Player p) {
+    public int use(Player p, Mob mob) {
         int parmor=p.getArmor();
         if(parmor+value<=100)
             p.setArmor(parmor+value);

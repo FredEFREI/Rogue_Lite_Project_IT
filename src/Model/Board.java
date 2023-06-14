@@ -136,11 +136,12 @@ public class Board {
                     options.add("Inventory");
                     options.add("Flee");
                     System.out.println("Fight started with "+board[c.width][c.height].getClass().getSimpleName());
+                    Mob mob = (Mob) board[c.width][c.height];
                     while(!fight_ended) {
                         switch (ConsoleWriter.AskQuestion(options)) {
                             case 0:
                                 player.attack((Mob)board[c.width][c.height]);
-                                if(((Mob) board[c.width][c.height]).isDead()) {
+                                if(mob.isDead()) {
                                     System.out.println("Type anything to continue");
                                     ConsoleWriter.waitPlayer();
                                     fight_ended=true;
@@ -151,20 +152,7 @@ public class Board {
                                 ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
                                 break;
                             case 2:
-                                ConsoleWriter.printList("Inventory :",player.getInventory());
-                                ArrayList<String> o=new ArrayList<>();
-                                o.add("Use an Item");
-                                if(ConsoleWriter.AskQuestion(o)==0) {
-                                    ArrayList<String> opt = new ArrayList<>();
-                                    for (Collectible elem : player.getInventory()) {
-                                        opt.add(elem.toString());
-                                    }
-                                    int itemid=ConsoleWriter.AskQuestion(opt);
-                                    player.getInventory().get(itemid).use(player);
-                                    player.removeItem(player.getInventory().get(itemid));
-                                    System.out.println("Item used");
-                                    ((Mob)board[c.width][c.height]).attack(player);
-                                }
+                                player.useItem(mob);
                                 break;
                             case 3:
                                 return "You fled...";

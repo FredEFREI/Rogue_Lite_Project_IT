@@ -53,7 +53,7 @@ public class Controller {
                         }
                         int itemid=ConsoleWriter.AskQuestion(opt);
                         if(itemid>=0) {
-                            Board.getPlayer().getInventory().get(itemid).use(Board.getPlayer());
+                            Board.getPlayer().getInventory().get(itemid).use(Board.getPlayer(), null);
                             Board.getPlayer().removeItem(Board.getPlayer().getInventory().get(itemid));
                             ConsoleWriter.printBoard(Board.getBoard());
                             System.out.println("Item used");

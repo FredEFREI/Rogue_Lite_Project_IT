@@ -70,7 +70,29 @@ public class Player extends BoardObject implements Mob {
         }else{
             ConsoleWriter.printBar("Enemy Health",m.getHealth());
             m.attack(this);
+        }
+    }
 
+    public boolean useItem(Mob mob){
+        if (inventory.size() < 1){
+            System.out.println("You have no item in your inventory");
+            return false;
+        }
+        else {
+            ConsoleWriter.printList("Inventory :", inventory);
+            ArrayList<String> o=new ArrayList<>();
+            o.add("Use an Item");
+            if(ConsoleWriter.AskQuestion(o)==0) {
+                ArrayList<String> opt = new ArrayList<>();
+                for (Collectible elem : inventory) {
+                    opt.add(elem.toString());
+                }
+                int itemid=ConsoleWriter.AskQuestion(opt);
+                inventory.get(itemid).use(this, mob);
+                removeItem(inventory.get(itemid));
+                System.out.println("Item used");
+            }
+            return true;
         }
     }
 
