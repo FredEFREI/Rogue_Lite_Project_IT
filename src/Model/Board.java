@@ -57,7 +57,7 @@ public class Board {
      * @param goodsNum Nombre d'items
      */
     public Board(int wallNum,int goodsNum,int enemyNum){
-        flushBoard(10);
+        flushBoard(9);
         player=new Player();
         for(int i=0;i<wallNum;i++){
             new Wall();
@@ -88,20 +88,20 @@ public class Board {
         }
         switch ((int) Math.round(Math.random()*3)){
             case 0:
-                exit=new Exit(new Dimension(size/2,0));
-                board[size/2][0]=exit;
+                exit=new Exit(new Dimension(size/2+1,0));
+                board[size/2+1][0]=exit;
                 break;
             case 1:
-                exit=new Exit(new Dimension(0,size/2));
-                board[size/2][0]=exit;
+                exit=new Exit(new Dimension(0,size/2+1));
+                board[0][size/2+1]=exit;
                 break;
             case 2:
-                exit=new Exit(new Dimension(size,size/2));
-                board[size/2][0]=exit;
+                exit=new Exit(new Dimension(size+1,size/2+1));
+                board[size+1][size/2+1]=exit;
                 break;
             case 3:
-                exit=new Exit(new Dimension(size/2,size));
-                board[size/2][0]=exit;
+                exit=new Exit(new Dimension(size/2+1,size+1));
+                board[size/2+1][size+1]=exit;
                 break;
         }
     }

@@ -82,4 +82,5 @@ public class Controller {
         }
     }
     public static void restart() {b=new Board(5,5,1);}
+    public static void nextBoard(){};
 }
