@@ -152,7 +152,9 @@ public class Board {
                                 ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
                                 break;
                             case 2:
-                                player.useItem(mob);
+                                if(player.useItem(mob)) {
+                                    mob.attack(player);
+                                }
                                 break;
                             case 3:
                                 return "You fled...";
