@@ -17,18 +17,15 @@ public class Player extends BoardObject implements Mob {
     private int damage=10;
     private ArrayList<Item> inventory;
 
-    public Player(){
+    public Player(int boardSize){
         type = ObjType.player;
-        Dimension d = Board.generateCoordinates(this);
-        boardX = d.width;
-        boardY = d.height;
+        setCoordinates(new Dimension(boardSize/2+1,boardSize/2+1));
         inventory = new ArrayList<>();
     }
 
     public Player(Dimension coordinates){
         type = ObjType.player;
-        boardX=coordinates.width;
-        boardY=coordinates.height;
+        setCoordinates(coordinates);
         inventory = new ArrayList<>();
     }
 

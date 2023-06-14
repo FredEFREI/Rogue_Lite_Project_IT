@@ -38,7 +38,30 @@ public class Board {
      */
     public Board(int size,int wallNum,int goodsNum,int enemyNum){
         flushBoard(size);
-        player=new Player();
+        player=new Player(size);
+        board[player.getCoordinates().width][player.getCoordinates().height]=player;
+        for(int i=0;i<wallNum;i++){
+            new Wall();
+        }
+        for(int i=0;i<goodsNum;i++){
+            new Armor();
+        }
+        for(int i=0;i<enemyNum;i++){
+            new BasicEnemy();
+        }
+        ConsoleWriter.printBoard(board);
+    }
+    /**
+     * Constructeur générant un plateau
+     * @param size taille du plateau
+     * @param wallNum Nombre de murs
+     * @param goodsNum Nombre d'items
+     */
+    public Board(Player p,int size,int wallNum,int goodsNum,int enemyNum){
+        flushBoard(size);
+        player=p;
+        p.setCoordinates(new Dimension(size/2+1,size/2+1));
+        board[player.getCoordinates().width][player.getCoordinates().height]=player;
         for(int i=0;i<wallNum;i++){
             new Wall();
         }
@@ -58,7 +81,8 @@ public class Board {
      */
     public Board(int wallNum,int goodsNum,int enemyNum){
         flushBoard(9);
-        player=new Player();
+        player=new Player(9);
+        board[player.getCoordinates().width][player.getCoordinates().height]=player;
         for(int i=0;i<wallNum;i++){
             new Wall();
         }
@@ -191,7 +215,7 @@ public class Board {
             }
             if (board[c.width][c.height].getType() == ObjType.wall) {return "You can't walk thought walls";}
             if (board[c.width][c.height].getType() == ObjType.exit) {
-                if(exit.getSate()){Controller.restart();
+                if(exit.getSate()){Controller.nextBoard();
                     return "Board exited!";}
                 else
                     return "The exit is locked!";
@@ -242,4 +266,6 @@ public class Board {
         }
         return true;
     }
+
+
 }

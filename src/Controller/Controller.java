@@ -82,5 +82,5 @@ public class Controller {
         }
     }
     public static void restart() {b=new Board(5,5,1);}
-    public static void nextBoard(){};
+    public static void nextBoard(){b=new Board(Board.getPlayer(),Board.getBoard().length-2,5,5,1);};
 }
