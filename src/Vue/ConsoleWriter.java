@@ -96,7 +96,7 @@ public class ConsoleWriter {
                     System.out.println("Wrong number, please choose between 1 and "+options.size());
 
             } catch (NumberFormatException e) {
-                if(in.equals("stop")){return 0-1;}
+                if(in.equals("stop")){return -1;}
                 System.out.println("Please enter the number of the answer");
             }
         }

@@ -33,8 +33,8 @@ public class Armor extends Item {
 
     @Override
     public int collect(Player p) {
-        boardX=0;
-        boardY=0;
+        boardX=-1;
+        boardY=-1;
         p.addItem(this);
         return 0;
     }

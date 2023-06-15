@@ -79,24 +79,18 @@ public class Player extends BoardObject implements Mob {
             ConsoleWriter.printList("Inventory :", inventory);
             ArrayList<String> o=new ArrayList<>();
             o.add("Use an Item");
-            o.add("Return");
             if(ConsoleWriter.AskQuestion(o)==0) {
                 ArrayList<String> opt = new ArrayList<>();
                 for (Collectible elem : inventory) {
                     opt.add(elem.toString());
                 }
-                opt.add("Return");
                 int itemid=ConsoleWriter.AskQuestion(opt);
-                if (itemid == inventory.size()){
-                    return false;
-                }
                 inventory.get(itemid).use(this, mob);
                 removeItem(inventory.get(itemid));
                 System.out.println("Item used");
                 return true;
             }
             return false;
-
         }
     }
 

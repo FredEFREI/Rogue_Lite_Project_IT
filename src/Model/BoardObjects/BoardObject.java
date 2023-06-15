@@ -6,6 +6,7 @@ import java.awt.*;
  * Classe abstraite mère de tous les objets affichables sur la board
  */
 public abstract class BoardObject {
+    private boolean visited = false;
     /**
      * Type d'objet (armure, vie ...)
      */
@@ -36,4 +37,22 @@ public abstract class BoardObject {
      * @return retourne le type de l'objet
      */
     public abstract ObjType getType();
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    @Override
+    public String toString() {
+        return "BoardObject{" +
+                "visited=" + visited +
+                ", type=" + type +
+                ", boardX=" + boardX +
+                ", boardY=" + boardY +
+                '}';
+    }
 }

@@ -10,8 +10,7 @@ import Model.BoardObjects.Mobs.Mob;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Classe permettant la gestion du plateau (génération, déplacements...)
@@ -38,6 +37,7 @@ public class Board {
      */
     public Board(int size,int wallNum,int goodsNum,int enemyNum){
         flushBoard(size);
+        /*
         player=new Player(size);
         board[player.getCoordinates().width][player.getCoordinates().height]=player;
         for(int i=0;i<wallNum;i++){
@@ -48,7 +48,8 @@ public class Board {
         }
         for(int i=0;i<enemyNum;i++){
             new BasicEnemy();
-        }
+        }*/
+        generateMaze();
         ConsoleWriter.printBoard(board);
     }
     /**
@@ -267,5 +268,92 @@ public class Board {
         return true;
     }
 
+    public void fillBoard(){
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board.length; j++){
+                board[i][j] = new Wall(new Dimension(i, j));
+            }
+        }
+    }
+
+    public Dimension findUnvisited(Dimension d){
+        ArrayList<Dimension> list = new ArrayList<>();
+        if (d.width+1 < board.length - 1 && board[d.width+1][d.height].isVisited()){
+            list.add(new Dimension(d.width-1, d.height));
+        }
+        if (d.width-1 > 0 && board[d.width-1][d.height].isVisited()){
+            list.add(new Dimension(d.width+1, d.height));
+        }
+        if (d.height+1 < board.length - 1 && board[d.width][d.height+1].isVisited()){
+            list.add(new Dimension(d.width, d.height-1));
+        }
+        if (d.height - 1 > 0 && board[d.width][d.height-1].isVisited()){
+            list.add(new Dimension(d.width, d.height+1));
+        }
+        if (list.size() == 0){
+            return null;
+        }
+        int randIndex = (int) (Math.random() * list.size());
+        return list.get(randIndex);
+    }
+
+    public boolean isValid(Dimension d){
+        return d.height < board.length - 1 && d.height > 0 && d.width < board.length - 1 && d.width > 0
+                && !board[d.width][d.height].isVisited();
+    }
+
+    public void generateMaze(){
+        fillBoard();
+        int size = board.length;
+        ArrayList<Dimension> list = new ArrayList<>();
+        Dimension center = new Dimension(board.length/2,board.length/2);
+        if (center.width+1 < size-1) {
+            list.add(new Dimension(center.width + 1, center.height));
+            board[center.width + 1][center.height].setVisited(true);
+        }
+        if (center.width-1 > 0) {
+            list.add(new Dimension(center.width - 1, center.height));
+            board[center.width - 1][center.height].setVisited(true);
+        }
+        if (center.height+1 < size - 1) {
+            list.add(new Dimension(center.width, center.height + 1));
+            board[center.width + 1][center.height + 1].setVisited(true);
+        }
+        if (center.height-1 > 0) {
+            list.add(new Dimension(center.width, center.height - 1));
+            board[center.width][center.height - 1].setVisited(true);
+        }
+        board[center.width][center.height] = new Empty(center);
+        board[center.width][center.height].setVisited(true);
+
+        while (!list.isEmpty()){
+            int randIndex = (int) (Math.random() * list.size());
+            Dimension d = list.get(randIndex);
+            Dimension target = findUnvisited(d);
+            if (target != null) {
+                if (isValid(target)) {
+                    board[d.width][d.height] = new Empty(d);
+                    board[target.width][target.width] = new Empty(target);
+                    board[target.width][target.height].setVisited(true);
+                    board[d.width][d.height].setVisited(true);
+
+                    if (target.width+1 < size){
+                        list.add(new Dimension(target.width + 1, target.height));
+                    }
+                    if (target.width-1 > 0){
+                        list.add(new Dimension(target.width - 1, target.height));
+                    }
+                    if (target.height+1 < size){
+                        list.add(new Dimension(target.width, target.height + 1));
+                    }
+                    if (target.height-1 >= 0){
+                        list.add(new Dimension(target.width, target.height - 1));
+                    }
+                }
+            }
+            list.remove(d);
+        }
+
+    }
 
 }

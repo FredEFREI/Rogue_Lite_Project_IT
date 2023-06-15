@@ -44,23 +44,7 @@ public class Controller {
                     System.out.println(fout);
                     break;
                 case "i":
-                    ConsoleWriter.printList("Inventory :",Board.getPlayer().getInventory());
-                    ArrayList<String> o=new ArrayList<>();
-                    o.add("Use an Item");
-                    if(ConsoleWriter.AskQuestion(o)==0) {
-                        ArrayList<String> opt = new ArrayList<>();
-                        for (Collectible elem : Board.getPlayer().getInventory()) {
-                            opt.add(elem.toString());
-                        }
-                        int itemid=ConsoleWriter.AskQuestion(opt);
-                        if(itemid>=0) {
-                            Board.getPlayer().getInventory().get(itemid).use(Board.getPlayer(), null);
-                            Board.getPlayer().removeItem(Board.getPlayer().getInventory().get(itemid));
-                            ConsoleWriter.printBoard(Board.getBoard());
-                            System.out.println("Item used");
-                            break;
-                        }
-                    }
+                    Board.getPlayer().useItem(null);
                     break;
                 case "restart":
                     restart();

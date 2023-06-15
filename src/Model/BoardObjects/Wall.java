@@ -37,4 +37,9 @@ public class Wall extends BoardObject{
     public ObjType getType() {
         return type;
     }
+
+    public void deleteWall() {
+        boardX = -1;
+        boardY = -1;
+    }
 }
