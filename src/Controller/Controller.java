@@ -19,7 +19,7 @@ public class Controller {
     static Board b;
     public Controller(){
         boolean running=true;
-        b=new Board(5,5,1,1);
+        b=new Board(15,5,1,1);
         String fout="";
         while (running){
             switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
