@@ -354,8 +354,8 @@ public class Board {
             }
             list.remove(dim);
         }
-        Dimension roomCenter = new Dimension((int) Math.round(Math.random() * (board.length - 3)) +1,
-                (int) Math.round(Math.random() * (board.length - 3)) +1);
+        Dimension roomCenter = new Dimension((int) Math.round(Math.random() * (board.length - 4)) +2,
+                (int) Math.round(Math.random() * (board.length - 4)) +2);
         createStartingRoom(roomCenter);
         player = new Player(roomCenter);
     }
