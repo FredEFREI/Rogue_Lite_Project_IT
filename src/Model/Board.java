@@ -9,7 +9,6 @@ import Model.BoardObjects.Mobs.Mob;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -29,14 +28,16 @@ public class Board {
      */
     static Exit exit;
 
+    static int minSize = 3;
+
     /**
      * Constructeur générant un plateau
      *
      * @param size     taille du plateau
-     * @param wallNum  Nombre de murs
      * @param goodsNum Nombre d'items
      */
-    public Board(int size, int wallNum, int goodsNum, int enemyNum) {
+    public Board(int size,  int goodsNum, int enemyNum) {
+        if (size < minSize){ size = minSize; }
         flushBoard(size);
         generateMaze();
         board[player.getCoordinates().width][player.getCoordinates().height] = player;
@@ -52,46 +53,14 @@ public class Board {
      * Constructeur générant un plateau
      *
      * @param size     taille du plateau
-     * @param wallNum  Nombre de murs
      * @param goodsNum Nombre d'items
      */
-    public Board(Player p, int size, int wallNum, int goodsNum, int enemyNum) {
+    public Board(Player p, int size, int goodsNum, int enemyNum) {
+        this(size, goodsNum, enemyNum);
         player = p;
-        p.setCoordinates(new Dimension(size / 2 + 1, size / 2 + 1));
         board[player.getCoordinates().width][player.getCoordinates().height] = player;
-        for (int i = 0; i < wallNum; i++) {
-            new Wall();
-        }
-        for (int i = 0; i < goodsNum; i++) {
-            new Armor();
-        }
-        for (int i = 0; i < enemyNum; i++) {
-            new BasicEnemy();
-        }
-        ConsoleWriter.printBoard(board);
     }
 
-    /**
-     * Constructeur générant un plateau de jeu par défaut
-     *
-     * @param wallNum  Nombre de murs
-     * @param goodsNum Nombre d'items
-     */
-    public Board(int wallNum, int goodsNum, int enemyNum) {
-        flushBoard(9);
-        player = new Player(9);
-        board[player.getCoordinates().width][player.getCoordinates().height] = player;
-        for (int i = 0; i < wallNum; i++) {
-            new Wall();
-        }
-        for (int i = 0; i < goodsNum; i++) {
-            new Armor();
-        }
-        for (int i = 0; i < enemyNum; i++) {
-            new BasicEnemy();
-        }
-        ConsoleWriter.printBoard(board);
-    }
 
     /**
      * Méthode pour le mise à zéro du plateau de jeu
@@ -354,8 +323,8 @@ public class Board {
             }
             list.remove(dim);
         }
-        Dimension roomCenter = new Dimension((int) Math.round(Math.random() * (board.length - 4)) +2,
-                (int) Math.round(Math.random() * (board.length - 4)) +2);
+        Dimension roomCenter = new Dimension((int) Math.floor(Math.random() * (board.length - 5)) +2,
+                (int) Math.floor(Math.random() * (board.length - 5)) +2);
         createStartingRoom(roomCenter);
         player = new Player(roomCenter);
     }

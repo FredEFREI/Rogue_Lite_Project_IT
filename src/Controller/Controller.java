@@ -23,7 +23,7 @@ public class Controller {
     private boolean running;
 
     public Controller(){
-        b= new Board(15,5,1,1);
+        b= new Board(3,1,1);
     }
 
     public Controller(BoardObject[][] board, Player player){
@@ -78,7 +78,13 @@ public class Controller {
             }
         }
     }
-    public void restart() {b=new Board(5,5,3);}
-    public void nextBoard(){b=new Board(Board.getPlayer(),Board.getBoard().length-2,5,5,1);};
+    public void restart() {
+        b=new Board(Board.getBoard().length - 2,5,3);
+        ConsoleWriter.printBoard(Board.getBoard());
+    }
+    public void nextBoard(){
+        b=new Board(Board.getPlayer(),Board.getBoard().length-4,5,1);
+        ConsoleWriter.printBoard(Board.getBoard());
+    }
 
 }
