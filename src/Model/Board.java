@@ -4,13 +4,12 @@ import Controller.Controller;
 import Model.BoardObjects.*;
 import Model.BoardObjects.Collectible.Armor;
 import Model.BoardObjects.Collectible.Collectible;
-import Model.BoardObjects.Collectible.Item;
 import Model.BoardObjects.Mobs.BasicEnemy;
 import Model.BoardObjects.Mobs.Mob;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
-import java.sql.Array;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -47,7 +46,6 @@ public class Board {
         for (int i = 0; i < enemyNum; i++) {
             new BasicEnemy();
         }
-        ConsoleWriter.printBoard(board);
     }
 
     /**
@@ -222,7 +220,7 @@ public class Board {
             }
             if (board[c.width][c.height].getType() == ObjType.exit) {
                 if (exit.getSate()) {
-                    Controller.nextBoard();
+                    new Controller().nextBoard();
                     return "Board exited!";
                 } else
                     return "The exit is locked!";
@@ -360,5 +358,13 @@ public class Board {
                 (int) Math.round(Math.random() * (board.length - 3)) +1);
         createStartingRoom(roomCenter);
         player = new Player(roomCenter);
+    }
+
+    public static void setBoard(BoardObject[][] board) {
+        Board.board = board;
+    }
+
+    public static void setPlayer(Player player){
+        Board.player = player;
     }
 }

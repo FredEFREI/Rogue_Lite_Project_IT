@@ -1,26 +1,39 @@
 package Controller;
 
 import Model.Board;
-import Model.BoardObjects.Collectible.Collectible;
+import Model.BoardObjects.BoardObject;
+import Model.BoardObjects.Player;
+import Saves.Save;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
-import java.io.Console;
-import java.io.DataInputStream;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Scanner;
+
 
 
 /**
  * Controlleur principal
  */
 public class Controller {
-    static Board b;
+    private Board b;
+
+    private boolean running;
+
     public Controller(){
-        boolean running=true;
-        b=new Board(15,5,1,1);
+        b= new Board(15,5,1,1);
+    }
+
+    public Controller(BoardObject[][] board, Player player){
+        Board.setPlayer(player);
+        Board.setBoard(board);
+    }
+    public void run(){
+        ConsoleWriter.printBoard(b.getBoard());
         String fout="";
+        running = true;
         while (running){
             switch (ConsoleWriter.readConsole().trim().toLowerCase(Locale.ROOT)){
                 case "z":
@@ -65,6 +78,7 @@ public class Controller {
             }
         }
     }
-    public static void restart() {b=new Board(5,5,3);}
-    public static void nextBoard(){b=new Board(Board.getPlayer(),Board.getBoard().length-2,5,5,1);};
+    public void restart() {b=new Board(5,5,3);}
+    public void nextBoard(){b=new Board(Board.getPlayer(),Board.getBoard().length-2,5,5,1);};
+
 }

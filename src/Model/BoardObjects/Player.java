@@ -1,6 +1,5 @@
 package Model.BoardObjects;
 
-import Model.Board;
 import Model.BoardObjects.Collectible.*;
 import Model.BoardObjects.Mobs.Mob;
 import Vue.ConsoleWriter;

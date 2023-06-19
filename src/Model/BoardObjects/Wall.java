@@ -1,7 +1,6 @@
 package Model.BoardObjects;
 
 import Model.Board;
-import Model.BoardObjects.Collectible.Collectible;
 
 import java.awt.*;
 

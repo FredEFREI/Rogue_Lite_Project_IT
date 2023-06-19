@@ -1,11 +1,12 @@
 package Model.BoardObjects;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Classe abstraite mère de tous les objets affichables sur la board
  */
-public abstract class BoardObject {
+public abstract class BoardObject implements Serializable {
     private boolean visited = false;
     /**
      * Type d'objet (armure, vie ...)
