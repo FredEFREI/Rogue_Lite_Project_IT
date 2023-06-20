@@ -12,5 +12,6 @@ public enum ObjType {
     empty,
     player,
     enemy,
-    exit
+    exit,
+    atkboost
 }

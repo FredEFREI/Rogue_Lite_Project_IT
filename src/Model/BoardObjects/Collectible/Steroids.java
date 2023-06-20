@@ -1,29 +1,19 @@
 package Model.BoardObjects.Collectible;
 
 import Model.Board;
-import Model.BoardObjects.Mobs.*;
+import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Mobs.Player;
 
 import java.awt.*;
 
-public class Armor extends Item {
+public class Steroids extends Item {
     private int value=25;
 
-    public Armor(){
-        super("Armor", "Gain armor", ObjType.armor);
+    public Steroids(){
+        super("Health potion", "Gain health", ObjType.atkboost);
         int size= (int) Math.round( Math.random()*3);
-        switch (size){
-            case 0:
-                value=25;
-                break;
-            case 1:
-                value=50;
-                break;
-            case 2:
-                value=100;
-                break;
-        }
+        value=1;
         Dimension d= Board.generateCoordinates(this);
         boardX=d.width;
         boardY=d.height;
@@ -33,17 +23,14 @@ public class Armor extends Item {
     public int collect(Player p) {
         boardX=-1;
         boardY=-1;
-        p.addItem(this);
+        use(p,null);
         return 0;
     }
 
     @Override
     public int use(Player p, Mob mob) {
-        int parmor=p.getArmor();
-        if(parmor+value<=100)
-            p.setArmor(parmor+value);
-        else
-            p.setArmor(100);
+        System.out.println("Atk Mult: "+p.getatkmult()+" -> "+(p.getatkmult()+value*0.1));
+        p.setatkmult(p.getatkmult()+value*0.1);
         return 0;
     }
 
@@ -66,6 +53,6 @@ public class Armor extends Item {
 
     @Override
     public String toString() {
-        return "Armor ("+value+")";
+        return "Steroids";
     }
 }

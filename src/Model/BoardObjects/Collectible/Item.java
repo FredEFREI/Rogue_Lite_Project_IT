@@ -1,14 +1,11 @@
 package Model.BoardObjects.Collectible;
 
-import Model.Board;
 import Model.BoardObjects.BoardObject;
-import Model.BoardObjects.Collectible.Collectible;
 import Model.BoardObjects.Mobs.*;
 import Model.BoardObjects.ObjType;
-import Model.BoardObjects.Player;
+import Model.BoardObjects.Mobs.Player;
 
 import java.awt.*;
-import java.util.*;
 
 
 public class Item extends BoardObject implements Collectible{

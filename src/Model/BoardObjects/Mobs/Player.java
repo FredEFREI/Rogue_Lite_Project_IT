@@ -1,7 +1,9 @@
-package Model.BoardObjects;
+package Model.BoardObjects.Mobs;
 
+import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.*;
 import Model.BoardObjects.Mobs.Mob;
+import Model.BoardObjects.ObjType;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
@@ -11,6 +13,7 @@ import java.util.*;
  * Classe représentant le joueur
  */
 public class Player extends BoardObject implements Mob {
+    double atkmult=1;
     private int armor=0;
     private int health=100;
     private int damage=10;
@@ -29,10 +32,7 @@ public class Player extends BoardObject implements Mob {
     }
 
 
-    @Override
-    public Dimension getCoordinates() {
-        return new Dimension(boardX,boardY);
-    }
+
 
     @Override
     public boolean isOnBoard() {
@@ -41,23 +41,9 @@ public class Player extends BoardObject implements Mob {
         return false;
     }
 
-    @Override
-    public ObjType getType() {
-        return type;
-    }
-
-    public void setCoordinates(Dimension c){boardX=c.width;boardY=c.height;}
-
-    public int getArmor() {
-        return armor;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
 
     public void attack(Mob m) {
-        int damages = (int) Math.round(Math.random() * 50);
+        int damages = (int)  Math.round((Math.random() * damage)*atkmult);
         m.inflictDamage(damages);
         System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
         if(m.isDead()){
@@ -95,7 +81,8 @@ public class Player extends BoardObject implements Mob {
 
     @Override
     public ArrayList<Item> die() {
-        System.out.println("You died");
+        System.out.println("You died!");
+        inventory.removeAll(inventory);
         return null;
     }
 
@@ -127,6 +114,8 @@ public class Player extends BoardObject implements Mob {
 
     @Override
     public boolean isDead() {
+        if(health<=0)
+            return true;
         return false;
     }
 
@@ -140,5 +129,26 @@ public class Player extends BoardObject implements Mob {
 
     public void removeItem(Item item) {
         inventory.remove(item);
+    }
+
+    public double getatkmult(){return atkmult;}
+
+    public void setatkmult(double mult){atkmult=mult;}
+
+    public int getDamages(){return damage;}
+
+    @Override
+    public Dimension getCoordinates() {
+        return new Dimension(boardX,boardY);
+    }
+    @Override
+    public ObjType getType() {
+        return type;
+    }
+
+    public void setCoordinates(Dimension c){boardX=c.width;boardY=c.height;}
+
+    public int getArmor() {
+        return armor;
     }
 }

@@ -2,13 +2,11 @@ package Controller;
 
 import Model.Board;
 import Model.BoardObjects.BoardObject;
-import Model.BoardObjects.Player;
-import Saves.Save;
+import Model.BoardObjects.Mobs.Player;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -23,7 +21,7 @@ public class Controller {
     private boolean running;
 
     public Controller(){
-        b= new Board(3,1,1);
+        b= new Board(8,1,1);
     }
 
     public Controller(BoardObject[][] board, Player player){

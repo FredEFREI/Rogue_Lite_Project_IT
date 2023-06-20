@@ -4,7 +4,6 @@ import Model.Board;
 import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.Item;
 import Model.BoardObjects.ObjType;
-import Model.BoardObjects.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -32,13 +31,9 @@ public class BasicEnemy extends BoardObject implements Mob{
     }
 
     public void attack(Mob m) {
-        int damages = (int) Math.round(Math.random() * 50);
+        int damages = (int)  Math.round(Math.random() * 15);
         m.inflictDamage(damages);
         System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
-        if(m.isDead()){
-            System.out.println("You died!");
-            m.die();
-        }
     }
 
     public ArrayList<Item> die() {

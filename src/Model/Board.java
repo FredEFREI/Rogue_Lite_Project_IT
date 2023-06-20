@@ -4,8 +4,11 @@ import Controller.Controller;
 import Model.BoardObjects.*;
 import Model.BoardObjects.Collectible.Armor;
 import Model.BoardObjects.Collectible.Collectible;
+import Model.BoardObjects.Collectible.HealthPotion;
+import Model.BoardObjects.Collectible.Steroids;
 import Model.BoardObjects.Mobs.BasicEnemy;
 import Model.BoardObjects.Mobs.Mob;
+import Model.BoardObjects.Mobs.Player;
 import Vue.ConsoleWriter;
 
 import java.awt.*;
@@ -41,8 +44,19 @@ public class Board {
         flushBoard(size);
         generateMaze();
         board[player.getCoordinates().width][player.getCoordinates().height] = player;
+        int r=0;
         for (int i = 0; i < goodsNum; i++) {
-            new Armor();
+            switch ((int) Math.round(Math.random()*3)){
+                case 0:
+                    new Armor();
+                    break;
+                case 1:
+                    new HealthPotion();
+                    break;
+                case 2:
+                    new Steroids();
+                    break;
+            }
         }
         for (int i = 0; i < enemyNum; i++) {
             new BasicEnemy();
@@ -164,6 +178,11 @@ public class Board {
                                     ConsoleWriter.waitPlayer();
                                     fight_ended = true;
                                 }
+                                if(player.isDead()){
+                                    player.die();
+                                    fight_ended=true;
+                                    new Controller().nextBoard();
+                                }
                                 break;
                             case 1:
                                 ConsoleWriter.printBar("HEALTH", Board.getPlayer().getHealth());
@@ -195,7 +214,7 @@ public class Board {
                     return "The exit is locked!";
             }
         } else {
-            out = board[c.width][c.height].getType() + " picked up!";
+            out = board[c.width][c.height] + " picked up!";
             ((Collectible) board[c.width][c.height]).collect(player);
             refreshCoordinates(c);
             return out;

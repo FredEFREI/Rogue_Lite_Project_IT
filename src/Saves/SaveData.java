@@ -1,8 +1,7 @@
 package Saves;
 
-import Controller.Controller;
 import Model.BoardObjects.BoardObject;
-import Model.BoardObjects.Player;
+import Model.BoardObjects.Mobs.Player;
 
 import java.io.Serializable;
 

@@ -1,10 +1,7 @@
 package Model.BoardObjects.Collectible;
 
 import Model.BoardObjects.Mobs.*;
-import Model.BoardObjects.ObjType;
-import Model.BoardObjects.Player;
-
-import java.awt.*;
+import Model.BoardObjects.Mobs.Player;
 
 /**
  * interface pour les objets réccupérables

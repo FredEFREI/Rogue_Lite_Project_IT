@@ -1,17 +1,17 @@
 package Model.BoardObjects.Collectible;
 
 import Model.Board;
-import Model.BoardObjects.Mobs.*;
+import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Mobs.Player;
 
 import java.awt.*;
 
-public class Armor extends Item {
+public class HealthPotion extends Item {
     private int value=25;
 
-    public Armor(){
-        super("Armor", "Gain armor", ObjType.armor);
+    public HealthPotion(){
+        super("Health potion", "Gain health", ObjType.heal);
         int size= (int) Math.round( Math.random()*3);
         switch (size){
             case 0:
@@ -39,11 +39,14 @@ public class Armor extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        int parmor=p.getArmor();
-        if(parmor+value<=100)
-            p.setArmor(parmor+value);
+        int phealth=p.getHealth();
+        if(phealth+value<=100) {
+            System.out.println("Health: "+p.getHealth()+" -> "+(p.getHealth()+value));
+            p.setHealth(phealth + value);
+        }
         else
-            p.setArmor(100);
+            System.out.println("Health: "+p.getHealth()+" -> 100");
+            p.setHealth(100);
         return 0;
     }
 
@@ -66,6 +69,6 @@ public class Armor extends Item {
 
     @Override
     public String toString() {
-        return "Armor ("+value+")";
+        return "Health ("+value+")";
     }
 }
