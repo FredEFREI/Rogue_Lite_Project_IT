@@ -21,7 +21,7 @@ public class Controller {
     private boolean running;
 
     public Controller(){
-        b= new Board(8,1,1);
+        b= new Board(17,1,1);
     }
 
     public Controller(BoardObject[][] board, Player player){

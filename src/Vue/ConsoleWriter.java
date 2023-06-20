@@ -25,7 +25,7 @@ public class ConsoleWriter {
             for (BoardObject elem:row) {
                 switch (elem.getType()){
                     case wall:
-                        res+="W\t";
+                        res+="⏹\t";
                         break;
                     case player:
                         res+="@\t";

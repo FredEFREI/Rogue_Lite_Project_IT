@@ -61,6 +61,7 @@ public class Board {
         for (int i = 0; i < enemyNum; i++) {
             new BasicEnemy();
         }
+        generateExit();
     }
 
     /**
@@ -346,6 +347,32 @@ public class Board {
                 (int) Math.floor(Math.random() * (board.length - 5)) +2);
         createStartingRoom(roomCenter);
         player = new Player(roomCenter);
+    }
+
+    public void generateExit(){
+        while(true){
+            int x = (int) Math.round(Math.random() * (board.length - 1)) ;
+            int y = (int) Math.round(Math.random() * (board.length - 1)) ;
+            if (!(x == y || x == 0 && y == board.length - 1 ||y == 0 && x == board.length - 1)) {
+                Dimension dim = new Dimension(x, y);
+                if (x == 0 && !(board[x+1][y].getType().equals(ObjType.wall))) {
+                    updateBoard(dim, new Exit(dim));
+                    break;
+                }
+                if (x == board.length - 1 && !(board[x-1][y].getType().equals(ObjType.wall))){
+                    updateBoard(dim, new Exit(dim));
+                    break;
+                }
+                if (y == 0 && !(board[x][y+1].getType().equals(ObjType.wall))) {
+                    updateBoard(dim, new Exit(dim));
+                    break;
+                }
+                if (y == board.length - 1 && !(board[x][y-1].getType().equals(ObjType.wall))){
+                    updateBoard(dim, new Exit(dim));
+                    break;
+                }
+            }
+        }
     }
 
     public static void setBoard(BoardObject[][] board) {
