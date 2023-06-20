@@ -25,19 +25,19 @@ public class ConsoleWriter {
             for (BoardObject elem:row) {
                 switch (elem.getType()){
                     case wall:
-                        res+="⏹\t";
+                        res+="███\t";
                         break;
                     case player:
-                        res+="@\t";
+                        res+=" @ \t";
                         break;
                     case enemy:
-                        res+="!\t";
+                        res+=" ! \t";
                         break;
                     case empty:
-                        res+=" \t";
+                        res+="   \t";
                         break;
                     case exit:
-                        res+="D\t";
+                        res+=" D \t";
                         break;
                 }
                 if(elem instanceof Collectible) {
