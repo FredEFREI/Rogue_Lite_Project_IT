@@ -3,6 +3,7 @@ package Model;
 import Controller.Controller;
 import Model.BoardObjects.*;
 import Model.BoardObjects.Collectible.*;
+import Model.BoardObjects.Mobs.BasicBoss;
 import Model.BoardObjects.Mobs.BasicEnemy;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.Mobs.Player;
@@ -83,6 +84,16 @@ public class Board {
         this(size, goodsNum, enemyNumn, controller);
         player = p;
         player.setCoordinates(spawnCoordinate);
+    }
+
+    public Board(Player p, Controller controller){
+        this.controller = controller;
+        flushBoard(7);
+        spawnCoordinate = new Dimension(3, 4);
+        player = p;
+        player.setCoordinates(spawnCoordinate);
+
+        new BasicBoss( new Dimension(3, 2));
     }
 
 

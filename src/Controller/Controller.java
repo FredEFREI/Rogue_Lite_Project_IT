@@ -67,6 +67,10 @@ public class Controller {
                     ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
                     System.out.println("Damages:\n"+Board.getPlayer().getDamages()+"\nDamage multiplicator:\n"+Board.getPlayer().getAtkmult());
                     break;
+                case "boss":
+                    b = new Board(Board.getPlayer(), this);
+                    ConsoleWriter.printBoard(Board.getBoard());
+                    break;
                 case "stop":
                     running=false;
                     break;
@@ -77,7 +81,12 @@ public class Controller {
         b=new Board(Board.getPlayer(), Board.getBoard().length - 2, Board.getMaxItem(), Board.getMaxEnemies(), this);
     }
     public void nextBoard(){
-        b=new Board(Board.getPlayer(), Board.getBoard().length,Board.getMaxItem() + 2 * (sizeMult() +1), Board.getMaxEnemies() + 1 + 2 * sizeMult(), this);
+        if (Board.getBoard().length < 17) {
+            b = new Board(Board.getPlayer(), Board.getBoard().length, Board.getMaxItem() + 2 * (sizeMult() + 1), Board.getMaxEnemies() + 1 + 2 * sizeMult(), this);
+        }
+        else {
+            b = new Board(Board.getPlayer(), this);
+        }
     }
     public Board getBoard() {
         return b;

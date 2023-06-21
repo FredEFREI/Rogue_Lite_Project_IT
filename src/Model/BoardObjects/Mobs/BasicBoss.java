@@ -59,7 +59,7 @@ public class BasicBoss extends BoardObject implements Mob {
             }
             it=new EngineeringDiploma();
             System.out.println("Engineering diploma");
-            Board.bossDefeat();
+            Board.bossDefeatUp();
             if (it != null) {
                 Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
                 it.collect(Board.getPlayer());
@@ -93,7 +93,7 @@ public class BasicBoss extends BoardObject implements Mob {
     }
 
     @Override
-    protected Dimension getCoordinates() {
+    public Dimension getCoordinates() {
         return new Dimension(boardX, boardY);
     }
 }
