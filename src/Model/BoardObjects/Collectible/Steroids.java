@@ -11,7 +11,7 @@ public class Steroids extends Item {
     private int value=25;
 
     public Steroids(){
-        super("Health potion", "Gain health", ObjType.atkboost);
+        super("Steroids", "adds 0.1 to your damage multiplicator", ObjType.atkboost);
         int size= (int) Math.round( Math.random()*3);
         value=1;
         Dimension d= Board.generateCoordinates(this);
