@@ -35,13 +35,15 @@ public class Board {
 
     static Dimension spawnCoordinate;
 
+    static Controller controller;
+
     /**
      * Constructeur générant un plateau
      *
      * @param size     taille du plateau
      * @param goodsNum Nombre d'items
      */
-    public Board(int size,  int goodsNum, int enemyNum) {
+    public Board(int size,  int goodsNum, int enemyNum, Controller controller) {
         if (size < minSize){ size = minSize; }
         flushBoard(size);
         generateMaze();
@@ -63,6 +65,7 @@ public class Board {
             new BasicEnemy();
         }
         generateExit();
+        this.controller = controller;
     }
 
     /**
@@ -71,8 +74,8 @@ public class Board {
      * @param size     taille du plateau
      * @param goodsNum Nombre d'items
      */
-    public Board(Player p, int size, int goodsNum, int enemyNum) {
-        this(size, goodsNum, enemyNum);
+    public Board(Player p, int size, int goodsNum, int enemyNumn, Controller controller) {
+        this(size, goodsNum, enemyNumn, controller);
         player = p;
         player.setCoordinates(spawnCoordinate);
     }
@@ -185,7 +188,7 @@ public class Board {
                                     player.die();
                                     fight_ended=true;
                                     refreshCoordinate = false;
-                                    new Controller().nextBoard();
+                                    controller.nextBoard();
                                 }
                                 break;
                             case 1:
@@ -199,7 +202,7 @@ public class Board {
                                         player.die();
                                         fight_ended=true;
                                         refreshCoordinate = false;
-                                        new Controller().nextBoard();
+                                        controller.nextBoard();
                                     }
                                     else
                                         mob.attack(player);
@@ -221,7 +224,7 @@ public class Board {
             }
             if (board[c.width][c.height].getType() == ObjType.exit) {
                 if (exit.getSate()) {
-                    new Controller().nextBoard();
+                    controller.nextBoard();
                     return "Board exited!";
                 } else
                     return "The exit is locked!";

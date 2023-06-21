@@ -96,6 +96,7 @@ public class Player extends BoardObject implements Mob {
     public void die() {
         System.out.println("You died!");
         inventory.removeAll(inventory);
+        health = 100;
     }
 
     public int getHealth() {
