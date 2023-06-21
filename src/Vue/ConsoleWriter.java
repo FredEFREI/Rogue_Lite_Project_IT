@@ -41,7 +41,7 @@ public class ConsoleWriter {
                         break;
                 }
                 if(elem instanceof Collectible) {
-                    res += "+\t";
+                    res += " + \t";
                 }
             }
             res+="\n";
