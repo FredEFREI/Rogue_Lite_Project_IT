@@ -168,10 +168,6 @@ public class Player extends BoardObject implements Mob {
         return armor;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
     public double getAtkmult() {
         return atkmult;
     }
