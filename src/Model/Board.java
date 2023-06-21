@@ -8,6 +8,7 @@ import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.Mobs.Player;
 import Vue.ConsoleWriter;
 
+import javax.swing.plaf.PanelUI;
 import java.awt.*;
 import java.util.*;
 
@@ -206,7 +207,7 @@ public class Board {
                                         player.die();
                                         fight_ended=true;
                                         refreshCoordinate = false;
-                                        controller.nextBoard();
+                                        controller.restart();
                                     }
                                     else
                                         mob.attack(player);
@@ -422,5 +423,13 @@ public class Board {
 
     public static int getBossDefeated() {
         return bossDefeated;
+    }
+
+    public static void setController(Controller controller) {
+        Board.controller = controller;
+    }
+
+    public static void bossDefeatUp(){
+        bossDefeated++;
     }
 }
