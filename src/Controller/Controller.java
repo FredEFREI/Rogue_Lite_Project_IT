@@ -21,7 +21,7 @@ public class Controller {
     private boolean running;
 
     public Controller(){
-        b= new Board(5,1,1, this);
+        b= new Board(5,3,1, this);
     }
 
     public Controller(BoardObject[][] board, Player player){
@@ -56,9 +56,11 @@ public class Controller {
                     break;
                 case "i":
                     Board.getPlayer().useItem(null);
+                    ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "restart":
                     restart();
+                    ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "stats":
                     ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
@@ -75,7 +77,7 @@ public class Controller {
         b=new Board(Board.getPlayer(), Board.getBoard().length - 2,5,3, this);
     }
     public void nextBoard(){
-        b=new Board(Board.getPlayer(),Board.getBoard().length,5,1, this);
+        b=new Board(Board.getPlayer(), Board.getBoard().length,5,1, this);
     }
 
     public Board getBoard() {
