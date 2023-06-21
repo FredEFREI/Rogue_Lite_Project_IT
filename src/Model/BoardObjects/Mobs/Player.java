@@ -91,10 +91,9 @@ public class Player extends BoardObject implements Mob {
     }
 
     @Override
-    public ArrayList<Item> die() {
+    public void die() {
         System.out.println("You died!");
         inventory.removeAll(inventory);
-        return null;
     }
 
     public int getHealth() {

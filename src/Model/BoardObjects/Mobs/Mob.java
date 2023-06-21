@@ -18,7 +18,7 @@ public interface Mob {
      * Méthode qui permet de faire mourrir un Mob
      * @return retourne un liste contenant le loot du mob
      */
-    ArrayList<Item> die();
+    void die();
 
     int getHealth();
     void inflictDamage(int i);

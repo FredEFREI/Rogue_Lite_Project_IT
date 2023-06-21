@@ -2,7 +2,10 @@ package Model.BoardObjects.Mobs;
 
 import Model.Board;
 import Model.BoardObjects.BoardObject;
+import Model.BoardObjects.Collectible.Armor;
+import Model.BoardObjects.Collectible.HealthPotion;
 import Model.BoardObjects.Collectible.Item;
+import Model.BoardObjects.Collectible.Steroids;
 import Model.BoardObjects.ObjType;
 
 import java.awt.*;
@@ -36,10 +39,26 @@ public class BasicEnemy extends BoardObject implements Mob{
         System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
     }
 
-    public ArrayList<Item> die() {
+    public void die() {
         health=0;
         System.out.println("Your enemy dropped: \n");
-        return null;
+        int nbitems=(int) Math.round(Math.random()*3);
+        for (int i = 0; i < nbitems; i++) {
+            switch ((int) Math.round(Math.random() * 3)) {
+                case 0:
+                    new Armor().collect(Board.getPlayer());
+                    System.out.println("Armor");
+                    break;
+                case 1:
+                    new HealthPotion().collect(Board.getPlayer());
+                    System.out.println("Health Potion");
+                    break;
+                case 2:
+                    new Steroids().collect(Board.getPlayer());
+                    System.out.println("Steroids");
+                    break;
+            }
+        }
     }
 
     public int getHealth() {
