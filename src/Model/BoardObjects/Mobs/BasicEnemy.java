@@ -74,7 +74,7 @@ public class BasicEnemy extends BoardObject implements Mob{
 
     @Override
     public void inflictDamage(int damages) {
-        health-=damages;
+        health -= damages/(Board.getBossDefeated()+1);
     }
 
     public void setHealth(int i) {
