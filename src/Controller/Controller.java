@@ -21,7 +21,7 @@ public class Controller {
     private boolean running;
 
     public Controller(){
-        b= new Board(17,1,1);
+        b= new Board(5,1,1);
     }
 
     public Controller(BoardObject[][] board, Player player){
@@ -76,7 +76,7 @@ public class Controller {
         ConsoleWriter.printBoard(Board.getBoard());
     }
     public void nextBoard(){
-        b=new Board(Board.getPlayer(),Board.getBoard().length-4,5,1);
+        b=new Board(Board.getPlayer(),Board.getBoard().length,5,1);
         ConsoleWriter.printBoard(Board.getBoard());
     }
 
