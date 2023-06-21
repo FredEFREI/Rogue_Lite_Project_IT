@@ -156,7 +156,10 @@ public class Player extends BoardObject implements Mob {
         return type;
     }
 
-    public void setCoordinates(Dimension c){boardX=c.width;boardY=c.height;}
+    public void setCoordinates(Dimension c){
+        boardX=c.width;
+        boardY=c.height;
+    }
 
     public int getArmor() {
         return armor;

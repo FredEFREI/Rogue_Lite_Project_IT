@@ -33,6 +33,8 @@ public class Board {
 
     static int minSize = 3;
 
+    static Dimension spawnCoordinate;
+
     /**
      * Constructeur générant un plateau
      *
@@ -43,7 +45,6 @@ public class Board {
         if (size < minSize){ size = minSize; }
         flushBoard(size);
         generateMaze();
-        board[player.getCoordinates().width][player.getCoordinates().height] = player;
         int r=0;
         for (int i = 0; i < goodsNum; i++) {
             switch ((int) Math.round(Math.random()*3)){
@@ -73,7 +74,7 @@ public class Board {
     public Board(Player p, int size, int goodsNum, int enemyNum) {
         this(size, goodsNum, enemyNum);
         player = p;
-        board[player.getCoordinates().width][player.getCoordinates().height] = player;
+        player.setCoordinates(spawnCoordinate);
     }
 
 
@@ -159,6 +160,7 @@ public class Board {
      */
     public static String movePlayer(Dimension c) {
         String out = "";
+        boolean refreshCoordinate = true;
         if (!(board[c.width][c.height] instanceof Collectible)) {
             if (board[c.width][c.height].getType() != ObjType.wall && board[c.width][c.height].getType() != ObjType.exit) {
                 if (board[c.width][c.height].getType() == ObjType.enemy) {
@@ -182,6 +184,7 @@ public class Board {
                                 if(player.isDead()){
                                     player.die();
                                     fight_ended=true;
+                                    refreshCoordinate = false;
                                     new Controller().nextBoard();
                                 }
                                 break;
@@ -199,7 +202,8 @@ public class Board {
                         }
                     }
                 }
-                refreshCoordinates(c);
+                if (refreshCoordinate)
+                    refreshCoordinates(c);
                 if (isEnded()) {
                     exit.setstate(true);
                 }
@@ -347,6 +351,8 @@ public class Board {
                 (int) Math.floor(Math.random() * (board.length - 5)) +2);
         createStartingRoom(roomCenter);
         player = new Player(roomCenter);
+        board[player.getCoordinates().width][player.getCoordinates().height] = player;
+        spawnCoordinate = roomCenter;
     }
 
     public void generateExit(){
