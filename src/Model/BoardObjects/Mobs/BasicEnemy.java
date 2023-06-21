@@ -47,8 +47,8 @@ public class BasicEnemy extends BoardObject implements Mob{
     }
 
     @Override
-    public void inflictDamage(int i) {
-        health-=i;
+    public void inflictDamage(int damages) {
+        health-=damages;
     }
 
     public void setHealth(int i) {
