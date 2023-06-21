@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args){
         c = askSave();
         c.run();
-        Save.setSave(new SaveData(Board.getBoard(), Board.getPlayer()));
+        Save.setSave(new SaveData(Board.getBoard(), Board.getPlayer(), Board.getExit()));
         Save.saveGame();
     }
 
@@ -32,6 +32,7 @@ public class Main {
         if (result == 1){
             SaveData data = Save.loadGame();
             c = new Controller(data.getBoardObjects(), data.getPlayer());
+            Board.setExit(data.getExit());
         }
         else {
             c = new Controller();

@@ -73,11 +73,12 @@ public class Controller {
     }
     public void restart() {
         b=new Board(Board.getPlayer(), Board.getBoard().length - 2,5,3);
-        ConsoleWriter.printBoard(Board.getBoard());
     }
     public void nextBoard(){
         b=new Board(Board.getPlayer(),Board.getBoard().length,5,1);
-        ConsoleWriter.printBoard(Board.getBoard());
     }
 
+    public Board getBoard() {
+        return b;
+    }
 }

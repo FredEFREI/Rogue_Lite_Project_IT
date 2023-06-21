@@ -389,4 +389,12 @@ public class Board {
     public static void setPlayer(Player player){
         Board.player = player;
     }
+
+    public static void setExit(Exit exit) {
+        Board.exit = exit;
+    }
+
+    public static Exit getExit() {
+        return exit;
+    }
 }
