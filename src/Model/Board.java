@@ -195,7 +195,14 @@ public class Board {
                                 break;
                             case 2:
                                 if (player.useItem(mob)) {
-                                    mob.attack(player);
+                                    if(player.isDead()){
+                                        player.die();
+                                        fight_ended=true;
+                                        refreshCoordinate = false;
+                                        new Controller().nextBoard();
+                                    }
+                                    else
+                                        mob.attack(player);
                                 }
                                 break;
                             case 3:

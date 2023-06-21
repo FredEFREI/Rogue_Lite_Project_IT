@@ -65,7 +65,8 @@ public class Player extends BoardObject implements Mob {
             ArrayList<String> o=new ArrayList<>();
             o.add("Use an Item");
             o.add("See description of an item");
-            if(ConsoleWriter.AskQuestion(o)==0) {
+            int usrres=ConsoleWriter.AskQuestion(o);
+            if(usrres==0) {
                 ArrayList<String> opt = new ArrayList<>();
                 for (Collectible elem : inventory) {
                     opt.add(elem.toString());
@@ -78,7 +79,7 @@ public class Player extends BoardObject implements Mob {
                 }
                 else{System.out.println("This item can't be used in this situation");return false;}
             }
-            else {
+            else if(usrres==1) {
                 ArrayList<String> opt = new ArrayList<>();
                 for (Collectible elem : inventory) {
                     opt.add(elem.toString());
