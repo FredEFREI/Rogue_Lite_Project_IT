@@ -88,12 +88,15 @@ public class Board {
 
     public Board(Player p, Controller controller){
         this.controller = controller;
-        flushBoard(7);
-        spawnCoordinate = new Dimension(3, 4);
+        flushBoard(5);
+        spawnCoordinate = new Dimension(4, 3);
         player = p;
         player.setCoordinates(spawnCoordinate);
-
-        new BasicBoss( new Dimension(3, 2));
+        board[4][3] = player;
+        BasicBoss boss = new BasicBoss( new Dimension(3, 2));
+        board[2][3] = boss;
+        maxItem = 1;
+        maxEnemies = 0;
     }
 
 
@@ -112,24 +115,6 @@ public class Board {
                     board[x][y] = new Empty(new Dimension(x, y));
                 }
             }
-        }
-        switch ((int) Math.round(Math.random() * 3)) {
-            case 0:
-                exit = new Exit(new Dimension(size / 2 + 1, 0));
-                board[size / 2 + 1][0] = exit;
-                break;
-            case 1:
-                exit = new Exit(new Dimension(0, size / 2 + 1));
-                board[0][size / 2 + 1] = exit;
-                break;
-            case 2:
-                exit = new Exit(new Dimension(size + 1, size / 2 + 1));
-                board[size + 1][size / 2 + 1] = exit;
-                break;
-            case 3:
-                exit = new Exit(new Dimension(size / 2 + 1, size + 1));
-                board[size / 2 + 1][size + 1] = exit;
-                break;
         }
     }
 
@@ -204,7 +189,7 @@ public class Board {
                                     player.die();
                                     fight_ended=true;
                                     refreshCoordinate = false;
-                                    controller.nextBoard();
+                                    controller.restart();
                                 }
                                 break;
                             case 1:

@@ -78,7 +78,7 @@ public class Controller {
         }
     }
     public void restart() {
-        b=new Board(Board.getPlayer(), Board.getBoard().length - 2, Board.getMaxItem(), Board.getMaxEnemies(), this);
+        b=new Board(Board.getPlayer(), 7, 3, 1, this);
     }
     public void nextBoard(){
         if (Board.getBoard().length < 17) {
