@@ -63,12 +63,7 @@ public class Controller {
                 case "stats":
                     ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
                     ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
-                    break;
-                case "test":
-                    ArrayList t=new ArrayList<>();
-                    t.add("test");
-                    t.add("tes");
-                    System.out.println( ConsoleWriter.AskQuestion(t));
+                    System.out.println("Damages:\n"+Board.getPlayer().getDamage()+"\nDamage multiplicator:\n"+Board.getPlayer().getAtkmult());
                     break;
                 case "stop":
                     running=false;

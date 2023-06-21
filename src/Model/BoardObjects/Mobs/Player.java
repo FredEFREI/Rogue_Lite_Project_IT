@@ -84,7 +84,8 @@ public class Player extends BoardObject implements Mob {
                     opt.add(elem.toString());
                 }
                 int itemid=ConsoleWriter.AskQuestion(opt);
-                System.out.println(inventory.get(itemid).getName()+": \n"+inventory.get(itemid).getDescription());
+                if(itemid!=-1)
+                    System.out.println(inventory.get(itemid).getName()+": \n"+inventory.get(itemid).getDescription());
             }
             return false;
         }
@@ -163,5 +164,13 @@ public class Player extends BoardObject implements Mob {
 
     public int getArmor() {
         return armor;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public double getAtkmult() {
+        return atkmult;
     }
 }
