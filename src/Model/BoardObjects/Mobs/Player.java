@@ -1,7 +1,9 @@
 package Model.BoardObjects.Mobs;
 
+import Model.Board;
 import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.*;
+import Model.BoardObjects.Empty;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.ObjType;
 import Vue.ConsoleWriter;
@@ -73,7 +75,8 @@ public class Player extends BoardObject implements Mob {
                 }
                 int itemid=ConsoleWriter.AskQuestion(opt);
                 if(inventory.get(itemid).use(this, mob)==0) {
-                    removeItem(inventory.get(itemid));
+                    if(inventory.size()>0)
+                        removeItem(inventory.get(itemid));
                     System.out.println("Item used");
                     return true;
                 }

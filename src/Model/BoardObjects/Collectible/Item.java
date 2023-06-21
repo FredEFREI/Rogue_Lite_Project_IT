@@ -63,4 +63,7 @@ public class Item extends BoardObject implements Collectible{
     public String getName() {
         return name;
     }
+
+    public int getBoardX(){return boardX;}
+    public int getBoardY(){return boardY;}
 }

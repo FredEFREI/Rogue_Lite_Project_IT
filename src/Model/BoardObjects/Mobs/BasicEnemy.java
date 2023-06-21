@@ -3,6 +3,7 @@ package Model.BoardObjects.Mobs;
 import Model.Board;
 import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.*;
+import Model.BoardObjects.Empty;
 import Model.BoardObjects.ObjType;
 
 import java.awt.*;
@@ -39,25 +40,30 @@ public class BasicEnemy extends BoardObject implements Mob{
     public void die() {
         health=0;
         System.out.println("Your enemy dropped:");
-        int nbitems=1+(int) Math.round(Math.random()*3);
+        int nbitems=1+(int) Math.round(Math.random()*2);
+        Item it=null;
         for (int i = 0; i < nbitems; i++) {
-            switch ((int) Math.round(Math.random() * 3)) {
+            switch ((int) Math.round(Math.random() * 2)) {
                 case 0:
-                    new Armor().collect(Board.getPlayer());
+                    it=new Armor();
                     System.out.println("Armor");
                     break;
-                case 1:
-                    new Sword().collect(Board.getPlayer());
+                case 2:
+                    it=new Sword();
                     System.out.println("Sword");
                     break;
-                case 2:
+                case 1:
                     System.out.println("Steroids:");
-                    new Steroids().collect(Board.getPlayer());
+                    it=new Steroids();
                     break;
-                case 3:
-                    new EngineeringDiploma().collect(Board.getPlayer());
+                /*case 3:
+                    it=new EngineeringDiploma();
                     System.out.println("Engineering diploma");
-                    break;
+                    break;*/
+            }
+            if(it!=null) {
+                Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
+                it.collect(Board.getPlayer());
             }
         }
     }

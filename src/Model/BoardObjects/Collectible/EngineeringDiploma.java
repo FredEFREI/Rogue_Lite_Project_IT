@@ -31,6 +31,7 @@ public class EngineeringDiploma extends Item {
     public int use(Player p, Mob mob) {
         if(mob!=null){
             mob.inflictDamage(100);
+            mob.die();
             p.getInventory().removeAll(p.getInventory());
             return 0;
         }
