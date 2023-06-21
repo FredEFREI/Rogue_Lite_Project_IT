@@ -33,6 +33,7 @@ public class Main {
             SaveData data = Save.loadGame();
             c = new Controller(data.getBoardObjects(), data.getPlayer());
             Board.setExit(data.getExit());
+            Board.setController(c);
         }
         else {
             c = new Controller();
