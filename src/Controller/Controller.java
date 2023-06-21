@@ -21,7 +21,7 @@ public class Controller {
     private boolean running;
 
     public Controller(){
-        b= new Board(5,3,1, this);
+        b= new Board(7,3,1, this);
     }
 
     public Controller(BoardObject[][] board, Player player){
@@ -74,13 +74,26 @@ public class Controller {
         }
     }
     public void restart() {
-        b=new Board(Board.getPlayer(), Board.getBoard().length - 2,5,3, this);
+        b=new Board(Board.getPlayer(), Board.getBoard().length - 2, Board.getMaxItem(), Board.getMaxEnemies(), this);
     }
     public void nextBoard(){
-        b=new Board(Board.getPlayer(), Board.getBoard().length,5,1, this);
+        b=new Board(Board.getPlayer(), Board.getBoard().length,Board.getMaxItem() + 2 * (sizeMult() +1), Board.getMaxEnemies() + 1 + 2 * sizeMult(), this);
     }
-
     public Board getBoard() {
         return b;
+    }
+
+    public int sizeMult(){
+        switch (Board.getBoard().length - 2) {
+            case 7, 9:
+                return 0;
+            case 11, 12:
+                return 1;
+            case 13:
+                return 2;
+            case 15:
+                return 3;
+        }
+        return 4;
     }
 }

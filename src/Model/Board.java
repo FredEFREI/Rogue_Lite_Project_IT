@@ -2,10 +2,7 @@ package Model;
 
 import Controller.Controller;
 import Model.BoardObjects.*;
-import Model.BoardObjects.Collectible.Armor;
-import Model.BoardObjects.Collectible.Collectible;
-import Model.BoardObjects.Collectible.HealthPotion;
-import Model.BoardObjects.Collectible.Steroids;
+import Model.BoardObjects.Collectible.*;
 import Model.BoardObjects.Mobs.BasicEnemy;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.Mobs.Player;
@@ -21,21 +18,26 @@ public class Board {
     /**
      * Tableau qui contiens le plateau de jeu
      */
-    static BoardObject[][] board;
+    private static BoardObject[][] board;
     /**
      * Raccourci vers l'objet joueur
      */
-    static Player player;
+    private static Player player;
     /**
      * Raccourci vers la sortie
      */
-    static Exit exit;
+    private static Exit exit;
 
-    static int minSize = 3;
+    private static int minSize = 3;
 
-    static Dimension spawnCoordinate;
+    private static Dimension spawnCoordinate;
 
-    static Controller controller;
+    private static int maxItem;
+    private static int maxEnemies;
+
+    private static Controller controller;
+
+    private static int bossDefeated = 0;
 
     /**
      * Constructeur générant un plateau
@@ -44,6 +46,9 @@ public class Board {
      * @param goodsNum Nombre d'items
      */
     public Board(int size,  int goodsNum, int enemyNum, Controller controller) {
+        this.controller = controller;
+        maxEnemies = enemyNum;
+        maxItem=goodsNum;
         if (size < minSize){ size = minSize; }
         flushBoard(size);
         generateMaze();
@@ -65,7 +70,6 @@ public class Board {
             new BasicEnemy();
         }
         generateExit();
-        this.controller = controller;
     }
 
     /**
@@ -127,7 +131,7 @@ public class Board {
         if (!isBoardFull()) {
             boolean found = false;
             Dimension res = new Dimension(-1, -1);
-            while (found == false) {
+            while (!found) {
                 int gx = (int) Math.round(Math.random() * (board[0].length - 2));
                 int gy = (int) Math.round(Math.random() * (board[0].length - 2));
                 if (board[gx][gy].getType() == ObjType.empty) {
@@ -408,12 +412,15 @@ public class Board {
         return exit;
     }
 
-    public static int[] NbGoods(){
-        int[] result = {0, 0};
-        for (int i = 0; i < board.length; i++){
-            for (int j = 0; j < board.length; j++){
-            }
-        }
-        return result;
+    public static int getMaxEnemies() {
+        return maxEnemies;
+    }
+
+    public static int getMaxItem() {
+        return maxItem;
+    }
+
+    public static int getBossDefeated() {
+        return bossDefeated;
     }
 }
