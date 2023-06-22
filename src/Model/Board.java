@@ -95,7 +95,7 @@ public class Board {
         board[4][3] = player;
         BasicBoss boss = new BasicBoss( new Dimension(3, 2));
         board[2][3] = boss;
-        maxItem = 1;
+        maxItem = 0;
         maxEnemies = 0;
     }
 
@@ -374,19 +374,23 @@ public class Board {
             if (!(x == y || x == 0 && y == board.length - 1 ||y == 0 && x == board.length - 1)) {
                 Dimension dim = new Dimension(x, y);
                 if (x == 0 && !(board[x+1][y].getType().equals(ObjType.wall))) {
-                    updateBoard(dim, new Exit(dim));
+                    exit = new Exit(dim);
+                    updateBoard(dim, exit);
                     break;
                 }
                 if (x == board.length - 1 && !(board[x-1][y].getType().equals(ObjType.wall))){
-                    updateBoard(dim, new Exit(dim));
+                    exit = new Exit(dim);
+                    updateBoard(dim, exit);
                     break;
                 }
                 if (y == 0 && !(board[x][y+1].getType().equals(ObjType.wall))) {
-                    updateBoard(dim, new Exit(dim));
+                    exit = new Exit(dim);
+                    updateBoard(dim, exit);
                     break;
                 }
                 if (y == board.length - 1 && !(board[x][y-1].getType().equals(ObjType.wall))){
-                    updateBoard(dim, new Exit(dim));
+                    exit = new Exit(dim);
+                    updateBoard(dim, exit);
                     break;
                 }
             }
