@@ -83,9 +83,10 @@ public class ConsoleWriter {
         String in="";
         while (!stopped) {
             System.out.println("Choose an option: ");
-            for (String option : options) {
-                System.out.println((options.indexOf(option))+1 + ": " + option);
+            for (int i=0;i<options.size();i++) {
+                System.out.println((i+1) + ": " + options.get(i));
             }
+            System.out.println("type s or stop to cancel");
             try {
 
                 in=sc.next().trim().toLowerCase();
@@ -96,7 +97,7 @@ public class ConsoleWriter {
                     System.out.println("Wrong number, please choose between 1 and "+options.size());
 
             } catch (NumberFormatException e) {
-                if(in.equals("stop")){return -1;}
+                if(in.trim().toLowerCase().equals("stop") || in.trim().toLowerCase().equals("s")){return -1;}
                 System.out.println("Please enter the number of the answer");
             }
         }

@@ -64,7 +64,7 @@ public class Board {
                     new HealthPotion();
                     break;
                 case 2:
-                    new Steroids();
+                    new Armor();
                     break;
             }
         }
@@ -205,8 +205,16 @@ public class Board {
                                         refreshCoordinate = false;
                                         controller.restart();
                                     }
-                                    else
-                                        mob.attack(player);
+                                    else {
+                                        if (!mob.isDead())
+                                            mob.attack(player);
+                                        else {
+                                            mob.die();
+                                            System.out.println("Type anything to continuetest");
+                                            ConsoleWriter.waitPlayer();
+                                            fight_ended = true;
+                                        }
+                                    }
                                 }
                                 break;
                             case 3:
@@ -216,9 +224,9 @@ public class Board {
                 }
                 if (refreshCoordinate)
                     refreshCoordinates(c);
-                if (isEnded()) {
-                    exit.setstate(true);
-                }
+            }
+            if (isEnded()) {
+                exit.setstate(true);
             }
             if (board[c.width][c.height].getType() == ObjType.wall) {
                 return "You can't walk thought walls";
@@ -431,5 +439,6 @@ public class Board {
 
     public static void bossDefeatUp(){
         bossDefeated++;
+        controller.nextBoard();
     }
 }

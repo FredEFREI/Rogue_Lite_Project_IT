@@ -69,6 +69,18 @@ public class HealthPotion extends Item {
 
     @Override
     public String toString() {
-        return "Health ("+value+")";
+        String s="";
+        switch (value){
+            case 25:
+                s+="Salade";
+                break;
+            case 50:
+                s+="Kebab";
+                break;
+            case 100:
+                s+="Self-serve buffet";
+                break;
+        }
+        return s+"("+value+")";
     }
 }

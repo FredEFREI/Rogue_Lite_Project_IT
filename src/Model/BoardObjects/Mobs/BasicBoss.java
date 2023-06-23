@@ -43,28 +43,39 @@ public class BasicBoss extends BoardObject implements Mob {
         int nbitems = 1 + (int) Math.round(Math.random() * 2);
         Item it = null;
         for (int i = 0; i < nbitems; i++) {
-            switch ((int) Math.round(Math.random() * 3)) {
+            switch ((int) Math.round(Math.random() * 4)) {
                 case 0:
-                    it = new Armor();
-                    System.out.println("Armor");
+                    it = new Fat();
+                    System.out.println("Fat");
                     break;
                 case 2:
                     it = new Sword();
-                    System.out.println("Sword");
+                    System.out.println("LesFrais's course pdf");
                     break;
                 case 1:
                     System.out.println("Steroids:");
                     it = new Steroids();
                     break;
+                case 3:
+                    it = new Sword();
+                    System.out.println("LesFrais's course pdf");
+                    break;
             }
-            it=new EngineeringDiploma();
-            System.out.println("Engineering diploma");
-            Board.bossDefeatUp();
             if (it != null) {
-                Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
-                it.collect(Board.getPlayer());
+                if(it.getBoardX()!=-1 || it.getBoardY()!=-1) {
+                    Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
+                    it.collect(Board.getPlayer());
+                }
             }
         }
+        if(Board.getBossDefeated()%5==0) {
+            it = new EngineeringDiploma();
+            Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
+            it.collect(Board.getPlayer());
+            System.out.println("Engineering diploma");
+        }
+        Board.bossDefeatUp();
+
     }
 
     public int getHealth() {
@@ -73,7 +84,10 @@ public class BasicBoss extends BoardObject implements Mob {
 
     @Override
     public void inflictDamage(int damages) {
-        health -= damages/(2*(Board.getBossDefeated()+1));
+        if(damages==-1)
+            health=0;
+        else
+            health -= damages/(Board.getBossDefeated()+1);
     }
 
     public void setHealth(int i) {

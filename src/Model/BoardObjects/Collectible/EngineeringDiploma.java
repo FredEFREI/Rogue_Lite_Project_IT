@@ -1,6 +1,8 @@
 package Model.BoardObjects.Collectible;
 
 import Model.Board;
+import Model.BoardObjects.BoardObject;
+import Model.BoardObjects.Empty;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.Mobs.Player;
 import Model.BoardObjects.ObjType;
@@ -29,13 +31,23 @@ public class EngineeringDiploma extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        if(mob!=null){
-            mob.inflictDamage(100);
-            mob.die();
-            p.getInventory().removeAll(p.getInventory());
-            return 0;
+        if(Board.getBoard().length>7) {
+            if(mob!=null)
+                mob.inflictDamage(-1);
+            BoardObject[][] b = Board.getBoard();
+            for (int i = 0; i < b.length; i++) {
+                for (int j = 0; j < b.length; j++) {
+                    if (b[i][j].getType() == ObjType.enemy)
+                        b[i][j] = new Empty(new Dimension(i, j));
+                }
+            }
         }
-        return -1;
+        else{
+            if(mob!=null)
+                mob.inflictDamage(50*(Board.getBossDefeated()+1));
+        }
+        p.getInventory().removeAll(p.getInventory());
+        return 0;
     }
 
     @Override

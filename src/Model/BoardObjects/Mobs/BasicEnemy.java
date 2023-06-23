@@ -43,23 +43,23 @@ public class BasicEnemy extends BoardObject implements Mob{
         int nbitems=1+(int) Math.round(Math.random()*2);
         Item it=null;
         for (int i = 0; i < nbitems; i++) {
-            switch ((int) Math.round(Math.random() * 2)) {
-                case 0:
+            switch ((int) Math.round(Math.random()*10)) {
+                case 0,1,2:
                     it=new Armor();
-                    System.out.println("Armor");
+                    System.out.println("Armor Item");
                     break;
-                case 2:
-                    it=new Sword();
-                    System.out.println("Sword");
+                case 3,4,5:
+                    it=new HealthPotion();
+                    System.out.println("Health Item");
                     break;
-                case 1:
-                    System.out.println("Steroids:");
-                    it=new Steroids();
+                case 6,7,8:
+                    it=new LesFrais();
+                    System.out.println("LesFrais");
                     break;
-                /*case 3:
-                    it=new EngineeringDiploma();
-                    System.out.println("Engineering diploma");
-                    break;*/
+                case 9:
+                    it = new Sword();
+                    System.out.println("LesFrais's course pdf");
+                    break;
             }
             if(it!=null) {
                 Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
@@ -74,7 +74,10 @@ public class BasicEnemy extends BoardObject implements Mob{
 
     @Override
     public void inflictDamage(int damages) {
-        health -= damages/(Board.getBossDefeated()+1);
+        if(damages==-1)
+            health=0;
+        else
+            health -= damages/(Board.getBossDefeated()+1);
     }
 
     public void setHealth(int i) {

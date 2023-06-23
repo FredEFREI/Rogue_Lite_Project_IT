@@ -16,6 +16,7 @@ import java.util.*;
  */
 public class Player extends BoardObject implements Mob {
     double atkmult=1;
+    double defmult=1;
     private int armor=0;
     private int health=100;
     private int damage=10;
@@ -67,6 +68,7 @@ public class Player extends BoardObject implements Mob {
             ArrayList<String> o=new ArrayList<>();
             o.add("Use an Item");
             o.add("See description of an item");
+            o.add("drop an item");
             int usrres=ConsoleWriter.AskQuestion(o);
             if(usrres==0) {
                 ArrayList<String> opt = new ArrayList<>();
@@ -74,15 +76,19 @@ public class Player extends BoardObject implements Mob {
                     opt.add(elem.toString());
                 }
                 int itemid=ConsoleWriter.AskQuestion(opt);
-                if(inventory.get(itemid).use(this, mob)==0) {
-                    if(inventory.size()>0)
-                        removeItem(inventory.get(itemid));
-                    System.out.println("Item used");
-                    return true;
+                if (itemid!=-1) {
+                    if (inventory.get(itemid).use(this, mob) == 0) {
+                        if (inventory.size() > 0)
+                            removeItem(inventory.get(itemid));
+                        System.out.println("Item used");
+                        return true;
+                    } else {
+                        System.out.println("This item can't be used in this situation");
+                        return false;
+                    }
                 }
-                else{System.out.println("This item can't be used in this situation");return false;}
             }
-            else if(usrres==1) {
+            if(usrres==1) {
                 ArrayList<String> opt = new ArrayList<>();
                 for (Collectible elem : inventory) {
                     opt.add(elem.toString());
@@ -90,6 +96,17 @@ public class Player extends BoardObject implements Mob {
                 int itemid=ConsoleWriter.AskQuestion(opt);
                 if(itemid!=-1)
                     System.out.println(inventory.get(itemid).getName()+": \n"+inventory.get(itemid).getDescription());
+            }
+            if(usrres==2){
+                ArrayList<String> opt = new ArrayList<>();
+                for (Collectible elem : inventory) {
+                    opt.add(elem.toString());
+                }
+                int itemid=ConsoleWriter.AskQuestion(opt);
+                if(itemid!=-1) {
+                    inventory.remove(itemid);
+                    System.out.println("Item dropped");
+                }
             }
             return false;
         }
@@ -107,12 +124,12 @@ public class Player extends BoardObject implements Mob {
     }
 
     public void inflictDamage(int i) {
-        if(armor>i){
-            armor-=i;
+        if(armor>i/defmult){
+            armor-=i/defmult;
         }else{
-            i-=armor;
+            i-=armor*defmult;
             armor=0;
-            health-=i;
+            health-=i/defmult;
         }
     }
 
@@ -147,9 +164,7 @@ public class Player extends BoardObject implements Mob {
         inventory.remove(item);
     }
 
-    public double getatkmult(){return atkmult;}
-
-    public void setatkmult(double mult){atkmult=mult;}
+    public void setAtkmult(double mult){atkmult=mult;}
 
     public int getDamages(){return damage;}
 
@@ -173,5 +188,13 @@ public class Player extends BoardObject implements Mob {
 
     public double getAtkmult() {
         return atkmult;
+    }
+
+    public double getDefmult() {
+        return defmult;
+    }
+
+    public void setDefmult(double defmult) {
+        this.defmult = defmult;
     }
 }

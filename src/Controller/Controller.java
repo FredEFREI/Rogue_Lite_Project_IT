@@ -30,6 +30,7 @@ public class Controller {
     }
     public void run(){
         ConsoleWriter.printBoard(b.getBoard());
+        System.out.println("Type help to get commands");
         String fout="";
         running = true;
         while (running){
@@ -54,25 +55,28 @@ public class Controller {
                     ConsoleWriter.printBoard(Board.getBoard());
                     System.out.println(fout);
                     break;
-                case "i":
+                case "i","inventory":
                     Board.getPlayer().useItem(null);
                     ConsoleWriter.printBoard(Board.getBoard());
                     break;
-                case "restart":
+                case "r","restart":
                     restart();
                     ConsoleWriter.printBoard(Board.getBoard());
                     break;
-                case "stats":
+                case "st","stats":
                     ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
                     ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
                     System.out.println("Damages:\n"+Board.getPlayer().getDamages()+"\nDamage multiplicator:\n"+Board.getPlayer().getAtkmult());
                     break;
-                case "boss":
+                case "sq","quit":
+                    running=false;
+                    break;
+                case "b","boss":
                     b = new Board(Board.getPlayer(), this);
                     ConsoleWriter.printBoard(Board.getBoard());
                     break;
-                case "stop":
-                    running=false;
+                case "help":
+                    System.out.println("Commands:\nz,q,s,d: move around\nst/stats: to print your stats\ni/inventory: open your inventory\nb/boss: go directly to the boss room\nsq/quit: save and quit\nr/restart: restart the game ");
                     break;
             }
         }
@@ -81,7 +85,7 @@ public class Controller {
         b=new Board(Board.getPlayer(), 7, 3, 1, this);
     }
     public void nextBoard(){
-        if (Board.getBoard().length < 17) {
+        if (Board.getBoard().length < 13) {
             b = new Board(Board.getPlayer(), Board.getBoard().length, Board.getMaxItem() + 2 * (sizeMult() + 1), Board.getMaxEnemies() + 1 + 2 * sizeMult(), this);
         }
         else {

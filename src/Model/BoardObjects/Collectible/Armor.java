@@ -66,6 +66,18 @@ public class Armor extends Item {
 
     @Override
     public String toString() {
-        return "Armor ("+value+")";
+        String s="";
+        switch (value){
+            case 25:
+                s+="IFund";
+                break;
+            case 50:
+                s+="SameSong";
+                break;
+            case 100:
+                s+="the MIGHTY 3310";
+                break;
+        }
+        return s+"("+value+")";
     }
 }

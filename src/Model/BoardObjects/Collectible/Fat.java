@@ -7,11 +7,11 @@ import Model.BoardObjects.ObjType;
 
 import java.awt.*;
 
-public class Sword extends Item {
-    private int value = 25;
+public class Fat extends Item {
+    private int value = 1;
 
-    public Sword() {
-        super("LesFrais's course pdf", "adds 1 to your damages", ObjType.weapon);
+    public Fat() {
+        super("Fat", "adds 0.1 to your armor multiplicator", ObjType.atkboost);
         int size = (int) Math.round(Math.random() * 3);
         value = 1;
         Dimension d = Board.generateCoordinates(this);
@@ -29,8 +29,8 @@ public class Sword extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        System.out.println("Atk: " + p.getDamages() + " -> " + (p.getDamages() + 1));
-        p.setDamage(p.getDamages() + 1);
+        System.out.println("Def Mult: " + p.getDefmult() + " -> " + (p.getDefmult() + value * 0.1));
+        p.setDefmult(p.getDefmult() + value * 0.1);
         return 0;
     }
 
@@ -53,6 +53,6 @@ public class Sword extends Item {
 
     @Override
     public String toString() {
-        return "LesFrais's course pdf";
+        return "Fat";
     }
 }
