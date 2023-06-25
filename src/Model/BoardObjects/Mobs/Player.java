@@ -17,9 +17,9 @@ import java.util.*;
 public class Player extends BoardObject implements Mob {
     double atkmult=1;
     double defmult=1;
-    private int armor=0;
+    private int armor=50;
     private int health=100;
-    private int damage=10;
+    private int damage=20;
     private ArrayList<Item> inventory;
 
     public Player(int boardSize){
@@ -114,9 +114,11 @@ public class Player extends BoardObject implements Mob {
 
     @Override
     public void die() {
-        System.out.println("You died!");
+        Board.bossDefeatDown();
+        System.out.println("You died!\nMob Level: "+Board.getBossDefeated());
         inventory.removeAll(inventory);
         health = 100;
+        armor=50;
     }
 
     public int getHealth() {

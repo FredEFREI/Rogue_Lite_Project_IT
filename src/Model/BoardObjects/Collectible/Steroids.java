@@ -29,7 +29,7 @@ public class Steroids extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        System.out.println("Atk Mult: "+p.getAtkmult()+" -> "+(p.getAtkmult()+value*0.1));
+        System.out.printf("Atk Mult: %.1f -> %.1f\n",p.getAtkmult(),p.getAtkmult()+value*0.1);
         p.setAtkmult(p.getAtkmult()+value*0.1);
         return 0;
     }

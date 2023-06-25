@@ -34,9 +34,6 @@ public class Board {
 
     private static Dimension spawnCoordinate;
 
-    private static int maxItem;
-    private static int maxEnemies;
-
     private static Controller controller;
 
     private static int bossDefeated = 0;
@@ -49,8 +46,6 @@ public class Board {
      */
     public Board(int size,  int goodsNum, int enemyNum, Controller controller) {
         this.controller = controller;
-        maxEnemies = enemyNum;
-        maxItem=goodsNum;
         if (size < minSize){ size = minSize; }
         flushBoard(size);
         generateMaze();
@@ -95,8 +90,6 @@ public class Board {
         board[4][3] = player;
         BasicBoss boss = new BasicBoss( new Dimension(3, 2));
         board[2][3] = boss;
-        maxItem = 0;
-        maxEnemies = 0;
     }
 
 
@@ -187,9 +180,8 @@ public class Board {
                                 }
                                 if(player.isDead()){
                                     player.die();
-                                    fight_ended=true;
-                                    refreshCoordinate = false;
                                     controller.restart();
+                                    return "";
                                 }
                                 break;
                             case 1:
@@ -201,16 +193,15 @@ public class Board {
                                 if (player.useItem(mob)) {
                                     if(player.isDead()){
                                         player.die();
-                                        fight_ended=true;
-                                        refreshCoordinate = false;
                                         controller.restart();
+                                        return "";
                                     }
                                     else {
                                         if (!mob.isDead())
                                             mob.attack(player);
                                         else {
                                             mob.die();
-                                            System.out.println("Type anything to continuetest");
+                                            System.out.println("Type anything to continue");
                                             ConsoleWriter.waitPlayer();
                                             fight_ended = true;
                                         }
@@ -421,14 +412,6 @@ public class Board {
         return exit;
     }
 
-    public static int getMaxEnemies() {
-        return maxEnemies;
-    }
-
-    public static int getMaxItem() {
-        return maxItem;
-    }
-
     public static int getBossDefeated() {
         return bossDefeated;
     }
@@ -440,5 +423,13 @@ public class Board {
     public static void bossDefeatUp(){
         bossDefeated++;
         controller.nextBoard();
+    }
+    public static void bossDefeatDown(){
+        if(bossDefeated>=1)
+            bossDefeated--;
+    }
+
+    public static void setBossDefeated(int bossDefeated) {
+        Board.bossDefeated = bossDefeated;
     }
 }

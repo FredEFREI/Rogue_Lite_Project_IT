@@ -86,7 +86,7 @@ public class Controller {
     }
     public void nextBoard(){
         if (Board.getBoard().length < 13) {
-            b = new Board(Board.getPlayer(), Board.getBoard().length, Board.getMaxItem() + 2 * (sizeMult() + 1), Board.getMaxEnemies() + 1 + 2 * sizeMult(), this);
+            b = new Board(Board.getPlayer(), Board.getBoard().length, 2 * (sizeMult() + 2), 1 + 2 * sizeMult(), this);
         }
         else {
             b = new Board(Board.getPlayer(), this);
@@ -97,7 +97,7 @@ public class Controller {
     }
 
     public int sizeMult(){
-        switch (Board.getBoard().length - 2) {
+        switch (Board.getBoard().length) {
             case 7, 9:
                 return 0;
             case 11, 12:

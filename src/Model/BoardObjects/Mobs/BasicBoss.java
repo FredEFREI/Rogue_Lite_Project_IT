@@ -32,15 +32,18 @@ public class BasicBoss extends BoardObject implements Mob {
     }
 
     public void attack(Mob m) {
-        int damages = (int) Math.round(Math.random() * 35 * (1 + Board.getBossDefeated()));
-        m.inflictDamage(damages);
-        System.out.println(this.getClass().getSimpleName() + " inflicted " + damages + " of damage to " + m.getClass().getSimpleName());
+        if(!isDead()) {
+            int damages = (int) Math.round(Math.random() * 35 * (1 + 0.5*Board.getBossDefeated()));
+            m.inflictDamage(damages);
+            System.out.println(this.getClass().getSimpleName() + " inflicted " + damages + " of damage to " + m.getClass().getSimpleName());
+        }
     }
 
     public void die() {
         health = 0;
-        System.out.println("Your enemy dropped:");
-        int nbitems = 1 + (int) Math.round(Math.random() * 2);
+
+        System.out.println("////////////////////\nYour enemy dropped:");
+        int nbitems = 1 + (int) Math.round(Math.random() * (5+Board.getBossDefeated()));
         Item it = null;
         for (int i = 0; i < nbitems; i++) {
             switch ((int) Math.round(Math.random() * 4)) {
@@ -75,7 +78,7 @@ public class BasicBoss extends BoardObject implements Mob {
             System.out.println("Engineering diploma");
         }
         Board.bossDefeatUp();
-
+        System.out.println("Mob Level: "+Board.getBossDefeated());
     }
 
     public int getHealth() {
@@ -87,7 +90,7 @@ public class BasicBoss extends BoardObject implements Mob {
         if(damages==-1)
             health=0;
         else
-            health -= damages/(Board.getBossDefeated()+1);
+            health -= damages/(Board.getBossDefeated()*0.5+1);
     }
 
     public void setHealth(int i) {

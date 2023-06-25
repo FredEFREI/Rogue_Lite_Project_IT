@@ -40,10 +40,14 @@ public class Armor extends Item {
     @Override
     public int use(Player p, Mob mob) {
         int parmor=p.getArmor();
-        if(parmor+value<=100)
-            p.setArmor(parmor+value);
-        else
+        if(parmor+value<=100) {
+            System.out.println("Armor: " + p.getArmor() + " -> " + (p.getArmor() + value));
+            p.setArmor(parmor + value);
+        }
+        else{
+            System.out.println("Armor: " + p.getHealth() + " -> 100");
             p.setArmor(100);
+        }
         return 0;
     }
 

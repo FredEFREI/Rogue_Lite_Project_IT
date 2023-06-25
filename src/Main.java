@@ -15,9 +15,11 @@ import java.util.ArrayList;
 public class Main {
     static Controller c;
     public static void main(String[] args){
+        System.out.println("//////////////\nCONSOLE KEEPER\n//////////////");
         c = askSave();
+        System.out.println("Mob Level: "+Board.getBossDefeated());
         c.run();
-        Save.setSave(new SaveData(Board.getBoard(), Board.getPlayer(), Board.getExit()));
+        Save.setSave(new SaveData(Board.getBoard(),Board.getBossDefeated(), Board.getPlayer(), Board.getExit()));
         Save.saveGame();
     }
 
@@ -29,11 +31,15 @@ public class Main {
         questions.add("Load game");
         int result = ConsoleWriter.AskQuestion(questions);
         Save.setPath(path);
-        if (result == 1){
+        if (result == 1 ){
             SaveData data = Save.loadGame();
-            c = new Controller(data.getBoardObjects(), data.getPlayer());
-            Board.setExit(data.getExit());
-            Board.setController(c);
+            if(data!=null) {
+                c = new Controller(data.getBoardObjects(), data.getPlayer());
+                Board.setBossDefeated(data.getMoblevel());
+                Board.setExit(data.getExit());
+                Board.setController(c);
+            }else
+                c = new Controller();
         }
         else {
             c = new Controller();

@@ -44,7 +44,7 @@ public class EngineeringDiploma extends Item {
         }
         else{
             if(mob!=null)
-                mob.inflictDamage(50*(Board.getBossDefeated()+1));
+                mob.inflictDamage(10000000*(Board.getBossDefeated()+1));
         }
         p.getInventory().removeAll(p.getInventory());
         return 0;

@@ -32,15 +32,15 @@ public class BasicEnemy extends BoardObject implements Mob{
     }
 
     public void attack(Mob m) {
-        int damages = (int)  Math.round(Math.random() * 15 *(1+Board.getBossDefeated()));
+        int damages = (int)  Math.round(Math.random() * 10 *(1+Board.getBossDefeated()*0.5));
         m.inflictDamage(damages);
         System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
     }
 
     public void die() {
         health=0;
-        System.out.println("Your enemy dropped:");
-        int nbitems=1+(int) Math.round(Math.random()*2);
+        System.out.println("////////////////////\nYour enemy dropped:");
+        int nbitems=1+(int) Math.round(Math.random()*(3+Board.getBossDefeated()));
         Item it=null;
         for (int i = 0; i < nbitems; i++) {
             switch ((int) Math.round(Math.random()*10)) {
@@ -48,7 +48,7 @@ public class BasicEnemy extends BoardObject implements Mob{
                     it=new Armor();
                     System.out.println("Armor Item");
                     break;
-                case 3,4,5:
+                case 3,4:
                     it=new HealthPotion();
                     System.out.println("Health Item");
                     break;
@@ -56,12 +56,12 @@ public class BasicEnemy extends BoardObject implements Mob{
                     it=new LesFrais();
                     System.out.println("LesFrais");
                     break;
-                case 9:
+                case 9,5:
                     it = new Sword();
                     System.out.println("LesFrais's course pdf");
                     break;
             }
-            if(it!=null) {
+            if(it!=null && it.getBoardY()!=-1 && it.getBoardX()!=-1) {
                 Board.getBoard()[it.getBoardX()][it.getBoardY()] = new Empty(new Dimension(it.getBoardX(), it.getBoardY()));
                 it.collect(Board.getPlayer());
             }
@@ -77,7 +77,7 @@ public class BasicEnemy extends BoardObject implements Mob{
         if(damages==-1)
             health=0;
         else
-            health -= damages/(Board.getBossDefeated()+1);
+            health -= damages/(Board.getBossDefeated()*0.5+1);
     }
 
     public void setHealth(int i) {

@@ -29,7 +29,7 @@ public class Fat extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        System.out.println("Def Mult: " + p.getDefmult() + " -> " + (p.getDefmult() + value * 0.1));
+        System.out.printf("Def Mult: %.1f -> %.1f\n",p.getDefmult(),p.getDefmult() + value * 0.1);
         p.setDefmult(p.getDefmult() + value * 0.1);
         return 0;
     }
