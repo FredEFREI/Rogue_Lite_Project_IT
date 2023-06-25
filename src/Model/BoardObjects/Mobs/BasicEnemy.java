@@ -58,7 +58,7 @@ public class BasicEnemy extends BoardObject implements Mob{
                     break;
                 case 9,5:
                     it = new Sword();
-                    System.out.println("LesFrais's course pdf");
+                    System.out.println("LesFrais's course pdf:");
                     break;
             }
             if(it!=null && it.getBoardY()!=-1 && it.getBoardX()!=-1) {

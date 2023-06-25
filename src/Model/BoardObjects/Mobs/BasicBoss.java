@@ -49,11 +49,11 @@ public class BasicBoss extends BoardObject implements Mob {
             switch ((int) Math.round(Math.random() * 4)) {
                 case 0:
                     it = new Fat();
-                    System.out.println("Fat");
+                    System.out.println("Fat:");
                     break;
                 case 2:
                     it = new Sword();
-                    System.out.println("LesFrais's course pdf");
+                    System.out.println("LesFrais's course pdf:");
                     break;
                 case 1:
                     System.out.println("Steroids:");
@@ -61,7 +61,7 @@ public class BasicBoss extends BoardObject implements Mob {
                     break;
                 case 3:
                     it = new Sword();
-                    System.out.println("LesFrais's course pdf");
+                    System.out.println("LesFrais's course pdf:");
                     break;
             }
             if (it != null) {
