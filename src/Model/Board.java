@@ -185,8 +185,8 @@ public class Board {
                                 }
                                 break;
                             case 1:
-                                ConsoleWriter.printBar("HEALTH", Board.getPlayer().getHealth());
-                                ConsoleWriter.printBar("ARMOR", Board.getPlayer().getArmor());
+                                ConsoleWriter.printBar(ConsoleWriter.RED+"HEALTH"+ConsoleWriter.RESET,Board.getPlayer().getHealth());
+                                ConsoleWriter.printBar(ConsoleWriter.ANSI_CYAN+"ARMOR"+ConsoleWriter.RESET,Board.getPlayer().getArmor());
                                 System.out.println("Damages:\n"+Board.getPlayer().getDamages()+"\nDamage multiplicator:\n"+Board.getPlayer().getAtkmult());
                                 break;
                             case 2:
@@ -209,7 +209,7 @@ public class Board {
                                 }
                                 break;
                             case 3:
-                                return "You fled...";
+                                return ConsoleWriter.GREEN+"You fled..."+ConsoleWriter.RESET;
                         }
                     }
                 }
@@ -220,17 +220,17 @@ public class Board {
                 exit.setstate(true);
             }
             if (board[c.width][c.height].getType() == ObjType.wall) {
-                return "You can't walk thought walls";
+                return ConsoleWriter.RED+"You can't walk thought walls"+ConsoleWriter.RESET;
             }
             if (board[c.width][c.height].getType() == ObjType.exit) {
                 if (exit.getSate()) {
                     controller.nextBoard();
-                    return "Board exited!";
+                    return ConsoleWriter.GREEN+"Board exited!"+ConsoleWriter.RESET;
                 } else
-                    return "The exit is locked!";
+                    return ConsoleWriter.RED+"The exit is locked!"+ConsoleWriter.RESET;
             }
         } else {
-            out = board[c.width][c.height] + " picked up!";
+            out = ConsoleWriter.GREEN +board[c.width][c.height] + " picked up!"+ConsoleWriter.RESET;
             ((Collectible) board[c.width][c.height]).collect(player);
             refreshCoordinates(c);
             return out;
@@ -268,6 +268,10 @@ public class Board {
         return player;
     }
 
+    /**
+     * Methode pour déterminer si tous les énemis sont morts
+     * @return retourne true si tous les énemis sont morts
+     */
     private static boolean isEnded() {
         for (BoardObject[] bo : board) {
             for (BoardObject elem : bo) {
@@ -279,6 +283,9 @@ public class Board {
         return true;
     }
 
+    /**
+     * Méthode pour remplir le Board de murs
+     */
     public void fillBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
@@ -287,6 +294,11 @@ public class Board {
         }
     }
 
+    /**
+     * Méthode pour trouver un mur à supprimer (sert à la génération)
+     * @param d coordonées
+     * @return retourne les coordonées du mur à supprimer
+     */
     public Dimension findWallToBreak(Dimension d) {
         ArrayList<Dimension> list = new ArrayList<>();
         if (d.width + 2 < board.length - 1 && board[d.width + 2][d.height].isVisited()) {

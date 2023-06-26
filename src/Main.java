@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Main {
     static Controller c;
     public static void main(String[] args){
-        System.out.println("//////////////\nCONSOLE KEEPER\n//////////////");
+        System.out.println(ConsoleWriter.YELLOW+"//////////////\nCONSOLE KEEPER\n//////////////"+ConsoleWriter.RESET);
         c = askSave();
         System.out.println("Mob Level: "+Board.getBossDefeated());
         c.run();

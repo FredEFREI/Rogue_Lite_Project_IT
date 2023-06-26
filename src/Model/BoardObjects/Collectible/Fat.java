@@ -4,6 +4,7 @@ import Model.Board;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.Mobs.Player;
 import Model.BoardObjects.ObjType;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 
@@ -29,7 +30,7 @@ public class Fat extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        System.out.printf("Def Mult: %.1f -> %.1f\n",p.getDefmult(),p.getDefmult() + value * 0.1);
+        System.out.printf(ConsoleWriter.GREEN +"Def Mult: %.1f -> %.1f\n"+ConsoleWriter.RESET,p.getDefmult(),p.getDefmult() + value * 0.1);
         p.setDefmult(p.getDefmult() + value * 0.1);
         return 0;
     }

@@ -5,6 +5,7 @@ import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.*;
 import Model.BoardObjects.Empty;
 import Model.BoardObjects.ObjType;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class BasicEnemy extends BoardObject implements Mob{
     public void attack(Mob m) {
         int damages = (int)  Math.round(Math.random() * 10 *(1+Board.getBossDefeated()*0.5));
         m.inflictDamage(damages);
-        System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
+        System.out.println(ConsoleWriter.RED +this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName()+ConsoleWriter.RESET);
     }
 
     public void die() {

@@ -10,6 +10,11 @@ import java.util.Scanner;
  * Classe permettant la lecture des entrées et l'affichage dans la console
  */
 public class ConsoleWriter {
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String ANSI_CYAN = "\u001B[36m";
     /**
      * Scanner de l'application
      */
@@ -25,23 +30,23 @@ public class ConsoleWriter {
             for (BoardObject elem:row) {
                 switch (elem.getType()){
                     case wall:
-                        res+="███\t";
+                        res+="███";
                         break;
                     case player:
-                        res+=" @ \t";
+                        res+=" @ ";
                         break;
                     case enemy:
-                        res+=" ! \t";
+                        res+=ConsoleWriter.RED+" ! "+ConsoleWriter.RESET;
                         break;
                     case empty:
-                        res+="   \t";
+                        res+="   ";
                         break;
                     case exit:
-                        res+=" D \t";
+                        res+=" D ";
                         break;
                 }
                 if(elem instanceof Collectible) {
-                    res += " + \t";
+                    res += ConsoleWriter.YELLOW+" + "+ConsoleWriter.RESET;
                 }
             }
             res+="\n";
@@ -94,7 +99,7 @@ public class ConsoleWriter {
                 if(c<=options.size() && c>0)
                     return c-1;
                 else
-                    System.out.println("Wrong number, please choose between 1 and "+options.size());
+                    System.out.println(ConsoleWriter.RED+"Wrong number, please choose between 1 and "+options.size()+ConsoleWriter.RESET);
 
             } catch (NumberFormatException e) {
                 if(in.trim().toLowerCase().equals("stop") || in.trim().toLowerCase().equals("s")){return -1;}

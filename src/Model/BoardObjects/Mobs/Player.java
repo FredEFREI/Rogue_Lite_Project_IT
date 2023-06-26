@@ -48,9 +48,9 @@ public class Player extends BoardObject implements Mob {
     public void attack(Mob m) {
         int damages = (int)  Math.round((Math.random() * damage)*atkmult);
         m.inflictDamage(damages);
-        System.out.println(this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName());
+        System.out.println(ConsoleWriter.GREEN+this.getClass().getSimpleName()+" inflicted "+damages+" of damage to "+m.getClass().getSimpleName()+ConsoleWriter.RESET);
         if(m.isDead()){
-            System.out.println(m.getClass().getSimpleName()+" died!");
+            System.out.println(ConsoleWriter.GREEN +m.getClass().getSimpleName()+" died!"+ConsoleWriter.RESET);
             m.die();
         }else{
             ConsoleWriter.printBar("Enemy Health",m.getHealth());
@@ -60,7 +60,7 @@ public class Player extends BoardObject implements Mob {
 
     public boolean useItem(Mob mob){
         if (inventory.size() < 1){
-            System.out.println("You have no item in your inventory");
+            System.out.println(ConsoleWriter.RED+"You have no item in your inventory"+ConsoleWriter.RESET);
             return false;
         }
         else {
@@ -83,7 +83,7 @@ public class Player extends BoardObject implements Mob {
                         System.out.println("Item used");
                         return true;
                     } else {
-                        System.out.println("This item can't be used in this situation");
+                        System.out.println(ConsoleWriter.RED+"This item can't be used in this situation"+ConsoleWriter.RESET);
                         return false;
                     }
                 }
@@ -115,7 +115,7 @@ public class Player extends BoardObject implements Mob {
     @Override
     public void die() {
         Board.bossDefeatDown();
-        System.out.println("You died!\nMob Level: "+Board.getBossDefeated());
+        System.out.println(ConsoleWriter.RED+"You died!"+ConsoleWriter.RESET+"\nMob Level: "+Board.getBossDefeated());
         inventory.removeAll(inventory);
         health = 100;
         armor=50;

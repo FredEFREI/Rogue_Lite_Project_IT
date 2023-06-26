@@ -64,8 +64,8 @@ public class Controller {
                     ConsoleWriter.printBoard(Board.getBoard());
                     break;
                 case "st","stats":
-                    ConsoleWriter.printBar("HEALTH",Board.getPlayer().getHealth());
-                    ConsoleWriter.printBar("ARMOR",Board.getPlayer().getArmor());
+                    ConsoleWriter.printBar(ConsoleWriter.RED+"HEALTH"+ConsoleWriter.RESET,Board.getPlayer().getHealth());
+                    ConsoleWriter.printBar(ConsoleWriter.ANSI_CYAN+"ARMOR"+ConsoleWriter.RESET,Board.getPlayer().getArmor());
                     System.out.println("Damages:\n"+Board.getPlayer().getDamages()+"\nDamage multiplicator:\n"+Board.getPlayer().getAtkmult());
                     break;
                 case "sq","quit":

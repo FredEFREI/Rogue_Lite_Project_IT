@@ -4,6 +4,7 @@ import Model.Board;
 import Model.BoardObjects.Mobs.*;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Mobs.Player;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 
@@ -41,11 +42,11 @@ public class Armor extends Item {
     public int use(Player p, Mob mob) {
         int parmor=p.getArmor();
         if(parmor+value<=100) {
-            System.out.println("Armor: " + p.getArmor() + " -> " + (p.getArmor() + value));
+            System.out.println(ConsoleWriter.GREEN+"Armor: " + p.getArmor() + " -> " + (p.getArmor() + value)+ ConsoleWriter.RESET);
             p.setArmor(parmor + value);
         }
         else{
-            System.out.println("Armor: " + p.getHealth() + " -> 100");
+            System.out.println(ConsoleWriter.GREEN+"Armor: " + p.getHealth() + " -> 100"+ConsoleWriter.RESET);
             p.setArmor(100);
         }
         return 0;

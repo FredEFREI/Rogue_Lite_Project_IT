@@ -4,6 +4,7 @@ import Model.Board;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Mobs.Player;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 
@@ -29,7 +30,7 @@ public class Steroids extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        System.out.printf("Atk Mult: %.1f -> %.1f\n",p.getAtkmult(),p.getAtkmult()+value*0.1);
+        System.out.printf(ConsoleWriter.GREEN+"Atk Mult: %.1f -> %.1f\n"+ ConsoleWriter.RESET,p.getAtkmult(),p.getAtkmult()+value*0.1);
         p.setAtkmult(p.getAtkmult()+value*0.1);
         return 0;
     }

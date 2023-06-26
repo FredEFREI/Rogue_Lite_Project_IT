@@ -4,6 +4,7 @@ import Model.Board;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.ObjType;
 import Model.BoardObjects.Mobs.Player;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 
@@ -41,11 +42,11 @@ public class HealthPotion extends Item {
     public int use(Player p, Mob mob) {
         int phealth=p.getHealth();
         if(phealth+value<=100) {
-            System.out.println("Health: "+p.getHealth()+" -> "+(p.getHealth()+value));
+            System.out.println(ConsoleWriter.GREEN +"Health: "+p.getHealth()+" -> "+(p.getHealth()+value)+ConsoleWriter.RESET);
             p.setHealth(phealth + value);
         }
         else
-            System.out.println("Health: "+p.getHealth()+" -> 100");
+            System.out.println(ConsoleWriter.GREEN +"Health: "+p.getHealth()+" -> 100"+ConsoleWriter.RESET);
             p.setHealth(100);
         return 0;
     }

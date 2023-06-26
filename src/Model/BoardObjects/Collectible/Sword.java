@@ -4,6 +4,7 @@ import Model.Board;
 import Model.BoardObjects.Mobs.Mob;
 import Model.BoardObjects.Mobs.Player;
 import Model.BoardObjects.ObjType;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 
@@ -29,7 +30,7 @@ public class Sword extends Item {
 
     @Override
     public int use(Player p, Mob mob) {
-        System.out.println("Atk: " + p.getDamages() + " -> " + (p.getDamages() + 1));
+        System.out.println(ConsoleWriter.GREEN+"Atk: " + p.getDamages() + " -> " + (p.getDamages() + 1)+ ConsoleWriter.RESET);
         p.setDamage(p.getDamages() + 1);
         return 0;
     }

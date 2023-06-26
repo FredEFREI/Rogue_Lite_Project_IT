@@ -5,6 +5,7 @@ import Model.BoardObjects.BoardObject;
 import Model.BoardObjects.Collectible.*;
 import Model.BoardObjects.Empty;
 import Model.BoardObjects.ObjType;
+import Vue.ConsoleWriter;
 
 import java.awt.*;
 
@@ -35,7 +36,7 @@ public class BasicBoss extends BoardObject implements Mob {
         if(!isDead()) {
             int damages = (int) Math.round(Math.random() * 35 * (1 + 0.5*Board.getBossDefeated()));
             m.inflictDamage(damages);
-            System.out.println(this.getClass().getSimpleName() + " inflicted " + damages + " of damage to " + m.getClass().getSimpleName());
+            System.out.println(ConsoleWriter.RED +this.getClass().getSimpleName() + " inflicted " + damages + " of damage to " + m.getClass().getSimpleName()+ConsoleWriter.RESET);
         }
     }
 
